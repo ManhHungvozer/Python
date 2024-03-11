@@ -1,0 +1,11 @@
+string = input("Nhập chuỗi của bạn: ")
+if len(string)%2!=0:
+  print("The central point of the string is", string[(len(string)+1)//2-1])
+  if string[:(len(string)+1)//2] == string[(len(string)+1)//2+1:]:
+    print("Symmertical String")
+  elif string[:(len(string)+1)//2] > string[((len(string)+1)+1)//2:]:
+    print("Left Bias")
+  else:
+    print("Right Bias")
+else:
+  print("There is no central point")
