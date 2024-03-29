@@ -1,0 +1,18 @@
+nvbp=(input("Nhập vào bàn phím và cách nhau bằng dấu cách và không được chứa \"a\": "))
+my_tuple=tuple((nvbp.split(" ")))
+print(my_tuple)
+if '30' not in my_tuple:
+    print("NOT FOUND")
+elif my_tuple.count('30')==1:
+    print("FOUND only one time at index: {0}".format(my_tuple['30']))
+else:
+    print('FOUND 3 time')
+    print("The first occurrence is at index: ", my_tuple.index('30'))
+    my_list=list(my_tuple)
+    my_list_new=my_list.reverse()
+    x=my_list_new.index('30')
+    my_list_new[x]=a
+    print(my_list_new)
+    my_list_final=tuple((my_list_new.reverse()))
+    print(my_list_final)
+    print("And the last occurrence is at index: ", my_list_final.index('a'))  
