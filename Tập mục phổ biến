@@ -1,0 +1,15 @@
+items={1,2,3,4,5,8,9,12,15,17,21,25,27,31,32,38,40,44,48,50}
+n=[set(map(int,input("Người 1: ").split(" "))),
+   set(map(int,input("Người 2: ").split(" "))),
+   set(map(int,input("Người 3: ").split(" "))),
+   set(map(int,input("Người 4: ").split(" "))),
+   set(map(int,input("Người 5: ").split(" ")))]
+sum=0
+for i in n:
+    if len(i&items)/len(i) > 0.4:
+        sum+=1
+print(sum)
+if sum>=(len(n)/2):
+    print("YES")
+else:
+    print("NO")
