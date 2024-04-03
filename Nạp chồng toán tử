@@ -1,0 +1,50 @@
+class Vector:
+    def __init__(self,point):
+        self.point=point
+    
+    def __add__(self,other):
+        if len(self.point) != len(other.point):
+          return "Size error!"
+        else:
+            hung=[]
+            for i in range(len(self.point)):
+                hung.append(self.point[i]+other.point[i])
+        return hung
+
+    def __sub__(self,other):
+        if len(self.point) != len(other.point):
+            return "Size error!"
+        else:
+            dep=[]
+            for i in range(len(self.point)):
+                dep.append(self.point[i]-other.point[i])
+        return dep 
+     
+    def __mul__(self,other):
+        if len(self.point) != len(other.point):
+            return "Size error!"
+        else:
+            trai=[]
+            for i in range(len(self.point)):
+                trai.append(self.point[i]*other.point[i])
+        return trai 
+    def __eq__(self,other):
+        if len(self.point) != len(other.point):
+            return "Size error!"
+        else:
+            if abs(self.point[i])==abs(other.point[i]):
+                return True
+            else:
+                return False
+
+v01=input("Nhập tọa độ vector1: ")
+v02=input("Nhập tọa độ vector2: ") 
+v1=[float(x) for x in v01.split()]
+v2=[float(k) for k in v02.split()]
+
+vector1 = Vector(v1)
+vector2 = Vector(v2)
+
+print(vector1+vector2)
+print(vector1-vector2)
+
