@@ -1,0 +1,10 @@
+file=open("TEK4.VN.txt",'r','encoding=utf-8')
+new_file=""
+for i in file:
+  if i==" ":
+    new_file+="#"
+  else:
+    new_file+=i 
+prin(new_file)
+file.close()
+  
