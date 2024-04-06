@@ -1,0 +1,78 @@
+def welcome():
+    entry =int(input("1: Hiển thị -- 2: Thêm liên lạc -- 3: Kiểm tra danh bạn -- 4: Xóa liên lạc--  5: Thoát --> Enter your number: "))
+    return entry
+
+def phonebook():
+    contact=[]
+    while True:
+        entry=welcome()
+        if entry==1:
+             f=open(r"contact.txt",'r',encoding='utf-8')
+             contacts=f.readline()
+             f.close()
+             if not contact:
+                    print("KHÔNG CÓ DANH BẠ!!!")
+             else:
+                  for i in contacts:
+                        print(i)
+            # print(contacts or print(f.readline))
+        elif entry==2:
+             checked=False
+             phone_number=input("Nhập số phone: ")
+             contact_name=input("Nhập name: ")
+             f=open(r"contact.txt",'r', encoding='utf-8')
+             contacts=f.readline()
+             f.close()
+             for i in contacts:
+                    if i.find(contact_name) !=1:
+                         print("Liên lạc đã tồn tại!!!")
+                         checked=True 
+                         break 
+                    if checked ==False:
+                         f=open(r"contact.txt", mode='a', encoding='uft-8')
+                         contacts.append(contact_name, "+", phone_number)
+                         contacts=f.write(contacts[-1])
+                         f.close()
+                         print("Liên lạc mới đã được lưu")
+        elif entry==3:
+             checked=False
+             f=open(r"contacts.txt",'r', encoding='utf-8')
+             contacts=f.readline()
+             f.close()
+             name=input("Nhập liên lạc cần kiểm tra: ")
+             for i in contacts:
+                    if i.find(name)!=-1:
+                         print("Liên lạc đã có trong danh bạ!!!")
+                         checked=True
+                         break
+                    if checked==False:
+                         print("Liên lạc này không có trong danh bạ!!!")
+        elif entry==4:
+             checked=False
+             f=open(r"contact.txt",'w',encoding='utf-8')
+             contacts=f.readline()
+             f.close()
+             name=input("Nhập liên hệ bạn muốn xóa")
+             for i in contacts:
+                    if i.find(name)!=-1:
+                        print(i)
+                        delete_var=contacts.index(i)
+                        checked==True
+                        confirm=input("Bạn chắc chắn muốn xóa liện hệ này? Y/N: ")
+                        if confirm.capitalize()=="Y":
+                             contacts.pop(delete_var)
+                             f=open(r"contacts.txt",'w')
+                             for i in contacts:
+                                    f.write(i)
+                             f.close()
+                        if confirm.capitalize()=="N":
+                             print("Quay trở lại danh bạ!!!")
+                             break
+                    if checked==False:
+                         print("Liên lạc này không có trong danh bạ!!!")
+        elif entry==5:
+             print("Xin cảm ơn!!!")
+             break 
+        else:
+             print("Mời bạn nhập lại")
+             #Hung se quay lai va hoc lai nhieu lan nua
