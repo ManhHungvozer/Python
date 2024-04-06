@@ -25,3 +25,39 @@ for i in file:
            new_file+=i[j]
 print(new_file)
 file.close()
+
+
+tệp này chuẩn xác nè 
+open('TEK4.VN.txt',mode='w',encoding='utf-8') as file:
+    file.write("Học lập trình cùng với Tek4.vn\n")
+    file.write("Lập trình Python cơ bản\n")
+    file.write("Lập trình Python nâng cao\n")
+files=open('TEK4.VN.txt',mode='r',encoding='utf-8')  
+new_file=""
+for i in files:
+  for j in range(0,len(i)):
+        if j==len(i)-1:
+           new_file+=("#"+i[j])
+        elif i[j]==" ":
+           new_file+="#"
+        else:
+           new_file+=i[j]
+print(new_file).     
+
+và    
+
+with open('TEK4.VN.txt',mode='w',encoding='utf-8') as file:
+    file.write("Học lập trình cùng với Tek4.vn\n")
+    file.write("Lập trình Python cơ bản\n")
+    file.write("Lập trình Python nâng cao\n")
+files=open('TEK4.VN.txt',mode='r',encoding='utf-8')  
+new_file=""
+for i in files:
+  for j in range(0,len(i)):
+        if j==len(i)-1:
+           new_file+=(i[j]+"#")
+        elif i[j]==" ":
+           new_file+="#"
+        else:
+           new_file+=i[j]
+print(new_file)
