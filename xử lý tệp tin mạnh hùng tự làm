@@ -1,0 +1,27 @@
+file=("Học lập trình cùng với Tek4.vn",
+"Lập trình Python cơ bản",
+"Lập trình Python nâng cao")
+new_file=""
+for i in file:
+  for j in range(0,len(i)):
+        if i[j]==" ":
+           new_file+="#"
+        else:
+           new_file+=i[j]
+  new_file+="#"
+print(new_file)
+
+
+
+file=open("/Users/aptx-4869/Desktop/TEK4.VN.txt",'r',encoding='utf-8')
+new_file=""
+for i in file:
+  for j in range(0,len(i)):
+        if i[j]==" ":
+           new_file+="#"
+        elif j==len(i)-1:
+            new_file+=(i[j]+"#")
+        else:
+           new_file+=i[j]
+print(new_file)
+file.close()
