@@ -1,0 +1,26 @@
+import requests 
+from bs4 import BeautifulSoup
+import webbrowser
+count = 0
+while True:
+    url = requests.get("https://dantri.com.vn")
+    soup = BeautifulSoup(url.content, "html.parser")
+    titles=soup.find_all(class_ = "article-title")
+    new_title=titles[0].text.strip()
+    children=titles[0].findChildren('a',recursive=False)
+    find_a=children[0]['href']
+    print("\n Bài báo", "\"", new_title, "\"")
+    print("Bạn có muốn đọc bài báo này không: Y/N")
+    ans=input("Câu trả lời của bạn: ").lower()
+    if ans=="y":
+        url="https://dantri.com.vn/%s" % find_a 
+        webbrowser.open(url)
+        break
+    elif ans=="n":
+        print("Xin mời chọn lại")
+        count+=1
+        print(count)
+        continue 
+    else:
+        print("Just \"y\" or \"n\" ")
+        break
