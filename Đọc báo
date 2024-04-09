@@ -1,26 +1,37 @@
 import requests 
-from bs4 import BeautifulSoup
-import webbrowser
-count = 0
+from bs4 import BeautifulSoup 
+import webbrowser 
+count=0
 while True:
-    url = requests.get("https://dantri.com.vn")
-    soup = BeautifulSoup(url.content, "html.parser")
-    titles=soup.find_all(class_ = "article-title")
-    new_title=titles[0].text.strip()
-    children=titles[0].findChildren('a',recursive=False)
+    url=requests.get("https://dantri.com.vn")
+    soup= BeautifulSoup(url.content, "html.parser")
+    titles=soup.find_all(class_ ="article-title")
+    new_title=titles[count].text.strip()
+    children=titles[count].findChildren("a", recursive=True)
     find_a=children[0]['href']
-    print("\n Bài báo", "\"", new_title, "\"")
-    print("Bạn có muốn đọc bài báo này không: Y/N")
+    print("\n Bài báo: ", "\"", new_title.upper(), "\"")
+    print("Mã số bài báo là (MSBB): ", count)
+    print("Bạn có muốn đọc bài báo này: Y/N")
+    print("Nếu bạn muốn chọn lại những bài báo đã gợi ý qua hãy nhấn \"H\" và điền mã số bài báo bạn muốn đọc nhé!!!")
     ans=input("Câu trả lời của bạn: ").lower()
     if ans=="y":
-        url="https://dantri.com.vn/%s" % find_a 
+        url="https://dantri.com.vn/%s"%find_a
         webbrowser.open(url)
         break
     elif ans=="n":
-        print("Xin mời chọn lại")
-        count+=1
-        print(count)
-        continue 
+        print("Tôi sẽ tìm cho bạn bài báo khác, hãy chờ trong giây lát!!!")
+        if count==0:
+            count+=2
+        else:
+            count+=1
+        continue
+    elif ans=="h":
+        msbb=int(input("Nhập mã số bài báo bạn muốn đọc(MSBB): "))
+        children=titles[msbb].findChildren("a", recursive=True)
+        find_msbb=children[0]['href']
+        url="https://dantri.com.vn/%s"%find_msbb
+        webbrowser.open(url)
     else:
-        print("Just \"y\" or \"n\" ")
-        break
+        print("Just \"y\" or \"n\"")
+        print("Hãy trả lời đúng cú pháp nhé")
+        
