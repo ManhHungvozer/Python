@@ -1,0 +1,9 @@
+try:
+    a = 1 / 3
+except:
+    print("Sai!")
+else:
+    b = 1 / 5
+    print(b)
+finally:
+    print("Dù ngoại lệ có xảy ra hay không thì tao vẫn in và hiện lên rằng: Hùng ơi cố lên nhé, dù có xảy ra chuyện gì thì chủ cần mày cố gắng không đầu hàng thì mày nhất định sẽ thành công!!!")
