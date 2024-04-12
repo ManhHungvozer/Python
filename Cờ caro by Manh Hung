@@ -1,0 +1,159 @@
+import random
+#Tạo bàn cờ caro 
+def drawBoard(board):
+    print(board[7] + '|' + board[8] + '|' + board[9])
+    print('-+-+-')
+    print(board[4] + '|' + board[5] + '|' + board[6])
+    print('-+-+-')
+    print(board[1] + '|' + board[2] + '|' + board[3])
+
+# Cho người chơi chọn ký kiệu của mình X/O(letter) 
+def inputPlayerLetter():
+    letter=''
+    while not (letter=="X" or letter=="O"):
+        print("Do you want to be X or O")
+        letter=input("Nhập lựa chọn của bạn: ").upper()
+        if letter=="X":
+            return ["X","O"] # Lưu ý đứng đầu là lựa chọn của người chơi , đứng sau là của AI by Mạnh Hùng!!!
+        if letter=="O":
+            return ["O","X"] # Lưu ý đứng đầu là lựa chọn của người chơi , đứng sau là của AI by Mạnh Hùng!!!
+
+#Chọn người đi trước (player or computer)
+def whoGoseFirst():
+    if random.randint(0,1)==0:
+        return "Computer"
+    else:
+        return "Player"
+
+#điền vào vị trí đã chọn
+def makeMove(board,letter,move):
+    board[move]=letter
+
+#Các trường hơp chiến thắng (all player and computer)
+def isWinner(board, letter):
+    return ((board[7]==letter and board[8]==letter and board[9]==letter) or
+    (board[4]==letter and board[5]==letter and board[6]==letter) or
+    (board[1]==letter and board[3]==letter and board[2]==letter) or
+    (board[7]==letter and board[4]==letter and board[1]==letter) or
+    (board[8]==letter and board[5]==letter and board[2]==letter) or
+    (board[9]==letter and board[6]==letter and board[3]==letter) or
+    (board[7]==letter and board[5]==letter and board[3]==letter) or
+    (board[9]==letter and board[5]==letter and board[1]==letter))
+
+#Các trường hợp sắp chiến thắng (all player and computer)
+def  sapWinner(board,letter):
+    return(((board[7]==board[8]==letter and board[9]==" ") or (board[7]==board[9]==letter and board[8]==" ") or (board[8]==board[9]==letter and board[7]==" ")) or
+    ((board[4]==board[5]==letter and board[6]==" ") or (board[4]==board[6]==letter and board[5]==" ") or (board[5]==board[6]==letter and board[4]==" ")) or
+    ((board[1]==board[2]==letter and board[3]==" ") or (board[1]==board[3]==letter and board[2]==" ") or (board[2]==board[3]==letter and board[1]==" ")) or
+    ((board[7]==board[4]==letter and board[1]==" ") or (board[7]==board[1]==letter and board[4]==" ") or (board[4]==board[1]==letter and board[7]==" ")) or
+    ((board[8]==board[5]==letter and board[2]==" ") or (board[8]==board[2]==letter and board[5]==" ") or (board[5]==board[2]==letter and board[8]==" ")) or
+    ((board[9]==board[6]==letter and board[3]==" ") or (board[9]==board[3]==letter and board[6]==" ") or (board[6]==board[3]==letter and board[9]==" ")) or
+    ((board[7]==board[5]==letter and board[3]==" ") or (board[7]==board[3]==letter and board[5]==" ") or (board[5]==board[3]==letter and board[7]==" ")) or
+    ((board[9]==board[5]==letter and board[1]==" ") or (board[9]==board[1]==letter and board[5]==" ") or (board[5]==board[1]==letter and board[9]==" ")))
+#Tạo ra 1 bản sao để computer dùng để suy nghĩ , nó sẽ thay đổi theo tình hình tùy theo lúc hàm được gọi chăng?
+def getBoardCopy(board):
+    boardCopy=[]
+    for i in board:
+        boardCopy.append(i)
+    return boardCopy 
+
+#hàm xác nhận xem một vị trí có còn trống không
+def isSpacefree(board, move):
+    return board[move]==" "
+
+#Hàm chọn vị trí của người chơi
+def getPlayerMove(board):
+    move=' '
+    while (move not in "1 2 3 4 5 6 7 8 9".split()) or (not isSpacefree(board, int(move))):
+        print("What you next move? (1-9)")
+        move=input("Nhập ô bạn chọn: ")
+    return int(move)
+
+#chọn ngẫu nhiên 1 ô trong danh sách các ô đưa vào và cho ra kết quả (các kết quả được chọn ngẫu nhiên từ các ô còn trống tương ứng) 
+def chooseRandomMoveFromList(board,moveList):
+    possibleMove=[]
+    for i in moveList:
+        if isSpacefree(board,i):
+            possibleMove.append(i)
+    if len(possibleMove)!=0:
+        return random.choice(possibleMove)
+    else:
+        return None
+
+#chọn vị trí của computer
+def getComputerMove(board, computerLetter):
+    if computerLetter=="X":
+        playerLetter="O"
+    else:
+        playerLetter="X"
+    
+    if sapWinner(board,computerLetter):
+        for i in range(1,10):
+            boardCopy = getBoardCopy(board)
+            if isSpacefree(boardCopy,i):
+                makeMove(boardCopy,computerLetter,i)
+                if isWinner(boardCopy,computerLetter):
+                    return int(i)      
+    elif sapWinner(board,playerLetter):
+        for i in range(1,10):
+            boardCopy = getBoardCopy(board)
+            if isSpacefree(boardCopy,i):
+                makeMove(boardCopy,playerLetter,i)
+                if isWinner(boardCopy,playerLetter):
+                    return int(i)
+   
+    elif chooseRandomMoveFromList(board,[1,3,7,9])!= None: 
+        return int(chooseRandomMoveFromList(board,[1,3,7,9]))
+    elif isSpacefree(board,5):
+        return int(5)
+    else:
+        return int(chooseRandomMoveFromList(board,[2,4,6,8]))
+
+#tạo hàm kiểm tra xem bảng đã đầy chưa
+def isBoardFull(board):
+    for i in range(1,10):
+        if isSpacefree(board,i):
+            return False 
+    return True 
+    
+###########################################################################################################################################
+
+while True:
+    theBoard=[" "]*10
+    playerLetter, computerLetter=inputPlayerLetter() 
+    turn=whoGoseFirst() 
+    print("The", turn, "will go first")
+    gameIsplaying=True
+    while gameIsplaying:
+        if turn=="Player":
+            drawBoard(theBoard)
+            move=getPlayerMove(theBoard)
+            makeMove(theBoard,playerLetter,move)
+            if isWinner(theBoard,playerLetter):
+                drawBoard(theBoard)
+                print("You are winner!!!")
+                gameIsplaying= False 
+            else:
+                if isBoardFull(theBoard):
+                    drawBoard(theBoard)
+                    print("The game is tie")
+                    break
+                else:
+                    turn="Computer"
+        else:
+            move=getComputerMove(theBoard,computerLetter)
+            makeMove(theBoard,computerLetter,move)
+            if isWinner(theBoard,computerLetter):
+                drawBoard(theBoard)
+                print("You are lose!!!")
+                gameIsplaying=False
+            else:
+                if isBoardFull(theBoard):
+                    drawBoard(theBoard)
+                    print("The game is tie!!!")
+                    break
+                else:
+                    turn="Player"
+    print("Do you want to play again? Y or N")
+    if not input('Nhập câu trả lời cũa bạn: ').lower().startswith("y"):
+        break
