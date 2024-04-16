@@ -62,7 +62,7 @@ class Blockchain:
     def vaild_nonce(self, last_nonce, nonce): #hàm kiểm tra tính hợp lệ của nonce
         guess=f'{last_nonce}{nonce}'.encode('utf-8')
         guess_hash = hashlib.sha256(guess).hexdigest()
-        return guess[0:4]=="0000"
+        return guess_hash[0:4]=="0000"
     
     def last_block(self):
         return self.chain[-1]
@@ -84,10 +84,7 @@ while ans!= 4:
     number=int(input("Nhập lựa chọn: "))
     if number==1:
         data= str(input('Nhập data của bạn: '))
-        print(data)
         last_block=blockchain.last_block()
-        print(last_block)
-        print(3)
         new_nonce= blockchain.proof_of_work(last_block)
         new_block=blockchain.new_block(new_nonce,last_block.hash, data)
         print("Đã thêm khối vào chuỗi")
