@@ -1,0 +1,103 @@
+import hashlib
+from time import time 
+
+# Tạo khối
+class Block:
+    def __init__(self,index,timestamp,data,previous_hash,nonce):
+        self.index=index
+        self.timestamp=timestamp
+        self.data=data
+        self.previous_hash=previous_hash
+        self.nonce=nonce
+        self.hash=self.hashing()
+
+#Tính giá trị băm của 1 khối
+    def hashing(self):
+        key=hashlib.sha256()
+        key.update(str(self.index).encode('utf-8'))
+        key.update(str(self.timestamp).encode("utf-8"))
+        key.update(str(self.data).encode('utf-8'))
+        key.update(str(self.previous_hash).encode("utf-8"))
+        key.update(str(self.nonce).encode('utf-8'))
+        return key.hexdigest()
+
+# Xây dựng chuỗi khối  
+class Blockchain:
+    def __init__(self):
+        self.chain=[]
+        self.new_block(data="Genesis block", previous_hash="1", nonce=100) #khởi tạo chuỗi đầu tiên --> cần điền các giá trị cho nó
+    
+    def vaild_chain(self): #Xác minh chuỗi khối hợp lệ
+        flash=True
+        for i in range(1,len(self.chain)):
+            if self.chain[i].hash!= self.chain[i].hashing():
+                flash=False
+                print("Giá trị Băm đã bị thay đổi")
+            if self.chain[i-1].hash != self.chain[i].previous_hash:
+                print("Giá trị băm của khối trước không được lưu trữ trong khối sau")
+                flash=False
+            if self.proof_of_work(self.chain[i-1])!=self.chain[i].nonce:
+                flash=False
+                print("Giá trị none đã bị thay đổi")
+            if self.chain[i].index!=i+1:
+                flash=False
+                print("Vị trí của khối đã bị thay đổi")
+        return flash
+    
+    def new_block(self,data,previous_hash,nonce): #xây dựng phương thức thêm chuỗi - Tạo thêm 1 chuổi trong khối
+        block=Block(len(self.chain)+1,time(),data,previous_hash,nonce)
+        self.chain.append(block)
+        return block
+    
+    def proof_of_work(self,last_block):#Xây dựng phương thức đồng thuận Proof of Work (PoW)
+        """ Thuật toán Proof of Work đơn giản là
+         - Tìm ra một số p' sao cho hàm băm hash(pp') trả về một giá trị băm chứa 4 số 0 ở đầu
+         - p là giá trị nonce của khối trước và p' là giá trị nonce của khối mới """
+        last_nonce = last_block.nonce
+        nonce=0
+        while self.vaild_nonce(last_nonce,nonce) is False:
+            nonce+=1
+        return nonce
+    
+    def vaild_nonce(self, last_nonce, nonce): #hàm kiểm tra tính hợp lệ của nonce
+        guess=f'{last_nonce}{nonce}'.encode('utf-8')
+        guess_hash = hashlib.sha256(guess).hexdigest()
+        return guess[0:4]=="0000"
+    
+    def last_block(self):
+        return self.chain[-1]
+                    
+    
+    def print_blockchain(self):
+        for i in range(0,len(self.chain)):
+            print(f'-------Block nummber: {self.chain[i].index}\nTimestamp: {self.chain[i].timestamp}\nData: {self.chain[i].data}\nPrevious_hash: {self.chain[i].previous_hash}\nHash: {self.chain[i].hash}\nNonce: {self.chain[i].nonce}')
+    
+##########################################################################################
+
+blockchain=Blockchain()
+ans=1
+print("1:Thêm khối")
+print("2:Hiển thị khối")
+print("3:Kiểm tra khối")
+print("4:Thoát")
+while ans!= 4:
+    number=int(input("Nhập lựa chọn: "))
+    if number==1:
+        data= str(input('Nhập data của bạn: '))
+        print(data)
+        last_block=blockchain.last_block()
+        print(last_block)
+        print(3)
+        new_nonce= blockchain.proof_of_work(last_block)
+        new_block=blockchain.new_block(new_nonce,last_block.hash, data)
+        print("Đã thêm khối vào chuỗi")
+    elif number == 2:
+        blockchain.print_blockchain()
+    elif number==3:
+        if blockchain.vaild_chain() == True:
+            print("Khối chưỗi hợp lệ")
+        else:
+            print("Khối chuỗi không hợp lệ")
+            break
+    else:
+        ans=4
