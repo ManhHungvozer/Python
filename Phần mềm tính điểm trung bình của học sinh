@@ -1,0 +1,82 @@
+# Các hàm sử dụng 
+def slhs(n): # Hàm quy định số lượng học sinh
+    if 2<=n<=10:
+        return True
+    return False
+
+def dirictory(x):# Hàm chuyển danh sách học sinh từ dạng str sang dirictory
+    g=x.split()
+    key=""
+    values=[]
+    for i in range(0,len(g)):
+        if i==0:
+            key+=g[i]
+        else:
+            values.append(g[i])
+    return {key:values}
+
+def diem(x):# Hàm quy định điểm của học sinh
+    for i in x:
+        for j in (x[i]):
+            if 0<=int(j)<=10:
+                return True
+    return False 
+
+def do_dai(x):# Hàm quy định số lượng môn có điểm của học sinh
+    for i in x:
+        if len(x[i])==3:
+            return True
+    return False 
+
+def diem_trung_binh(x):# Hàm tính điểm trung bình cho học sinh
+    ten_hoc_sinh=""
+    while True:
+        ten_hoc_sinh=input("Nhập tên học sinh bạn muốn tính điểm trung bình: ")
+        if ten_hoc_sinh in x:
+            break
+        else:
+            print("Tên học sinh không tồn tại, mời bạn nhập lại!!!")
+    ds_diem=list(map(int,x[ten_hoc_sinh]))
+    diem_trung_binh_1hs=round(sum(ds_diem)/len(ds_diem),2)
+    return diem_trung_binh_1hs
+
+#################################################################################
+
+print("""Xin chào, đây là phần mềm nhập điểm và tính toán điểm trung bình của học sinh!!!
+         Rất vui vì đã được đồng hành cùng bạn!!!""")  
+k="a"
+n=0
+dshs={}
+# Nhập dữ liệu
+while (slhs(n) is not True) or (do_dai(dshs) is not True) or (diem(dshs) is not True):
+    print("""Dữ liệu đầu vào phải thỏa mãn các điều kiện sau: 
+             * 2 ≤ Số lượng hồ sơ của học sinh ≤ 10
+             * 0 ≤ Điểm ≤ 100
+             * Độ dài của mảng điểm là 3""")
+    while len(k)>1 or ord(k)<50 or ord(k)>57:
+        print("Lưu ý số học sinh là 1 số nguyên và bé hơn 10!!!")
+        k = input("Nhập số học sinh: ")
+    n=int(k)
+    for i in range (1,n+1):
+        hoc_sinh =input("Nhập thông tin học sinh thứ " + str(i) + ": " )
+        dshs.update(dirictory(hoc_sinh))
+
+# Các lựa chọn xem dữ liệu
+while True:
+    diem_trung_binh_cua_1hs = diem_trung_binh(dshs)
+    print("Điểm trung bình là : ",diem_trung_binh_cua_1hs)
+    result=""
+    while result!="Y" and result!="N":
+        print("Bạn có muốn tiếp tục xem điểm trung bình của những học sinh khác không? Y/N")
+        result=input("Nhập câu trả lời của bạn: ").upper()
+        if result=="N":
+            print("Tạm biệt, hẹn gặp lại bạn!!!")
+            break
+        elif result=="Y":
+            print("Được chúng ta sẽ tiếp tục nhé!!!")
+        else:
+            print("Hãy điền câu trả lời là \"Y\" hoặc \"N\"")
+    if result=="N":
+        break
+###################################################################################
+print("This program coded by Manh Hung!!!")
