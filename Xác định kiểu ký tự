@@ -1,0 +1,64 @@
+def isalnum_test(string):
+    h=0
+    for i in string:
+        if i.isalnum() is True:#kiểm tra liệu các kí tự trong chuỗi có phải là các ký tự chữ và số (a-z, A-Z và 0-9) hay không
+            h+=1
+    if h>0:
+        return True
+    else:
+        return False
+
+def isalpha_test(string):
+    u=0
+    for i in string:
+        if i.isalpha() is True:#kiểm tra liệu các kí tự trong chuỗi có phải là các ký tự chữ (a-z và  A-Z) hay không
+            u+=1
+    if u >0:
+        return True
+    else:
+        return False
+
+def isdigit_test(string):
+    n=0
+    for i in string:
+        if i.isdigit() is True:#kiểm tra liệu các kí tự trong chuỗi có phải là các ký tự số (0-9) hay không
+            n+=1
+    if n>0:
+        return True
+    else:
+        return False
+
+def islower_test(string):
+    g=0
+    for i in string:
+        if i.islower():#kiểm tra liệu các kí tự trong chuỗi có phải là các ký tự chữ viết thường (a-z) hay không
+            g+=1
+    if g>0:
+        return True
+    else:
+        return False
+    
+def isupper_test(string):
+    o=0
+    for i in string:
+        if i.isupper():#kiểm tra liệu các kí tự trong chuỗi có phải là các ký tự chữ viết hoa (A-Z) hay không
+            o+=1
+    if o>0:
+        return True
+    else:
+        return False
+    
+########################################################################
+print("Bạn hãy nhập chuỗi có kích thước tối thiểu là 1 ký tự và tối đa là 10000 ký tự")
+while True:
+    hung=input("Nhập chuỗi của bạn: ")
+    if len(hung)<1 or len(hung)>1000:
+        print("Kích thước của chuỗi không phù hợp, mời bạn nhập lại!!!")
+    else:
+        break
+            
+print(isalnum_test(hung))
+print(isalpha_test(hung))
+print(isdigit_test(hung))
+print(islower_test(hung))
+print(isupper_test(hung))
