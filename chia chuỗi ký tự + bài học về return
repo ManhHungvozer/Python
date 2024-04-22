@@ -1,0 +1,24 @@
+def wrap(string,r):
+    n=len(string)%r
+    l=len(string)//r
+    for i in range(1,l+1):
+        print(string[r*(i-1):r*i])
+    if n!=0:
+        print(string[-n:])
+    return 1
+
+while True:
+    print("Hãy nhập chuỗi ký tự có độ dài tối thiểu là 1 và tối đa là 1000")
+    hung=input("Nhập chuỗi ký tự của bạn: ")
+    if len(hung)<1 or len(hung)>1000:
+        print("Kích thước chuỗi ký tự không phù hợp, mời bạn nhập lại ")
+    else:
+        while True:
+            print("Hãy nhập chiều rộng bạn muốn chia có kích thước tối thiểu là: 1 và tối đa là: "+str(len(hung)))
+            x=int(input("Mời bạn nhập chiều rộng mà bạn muốn: "))
+            if x<0 or x>len(hung):
+                print("Kích thước chiều rộng không phù hợp, mời bạn nhập lại ")
+            else:
+                break
+        break
+print(wrap(hung,x))
