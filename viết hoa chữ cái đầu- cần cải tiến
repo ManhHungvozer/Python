@@ -1,0 +1,24 @@
+def transtation(string):
+    hung=""
+    for i in string.split():
+        hung+=(i[0].upper()+i[1:]+" ")
+    return hung.strip()
+#######################################
+
+while True:
+    print("""Chuỗi ký tự S nhập vào phải thõa mãn:
+            * 0 < Độ dài chuỗi ký tự S < 1000.
+            * Chuỗi ký tự chứa các ký tự chữ và số và các khoảng trắng.""")
+    k=True
+    S=input("Nhập chuỗi ký tự của bạn: ")
+    for i in S:
+        if (i.isdigit() is not True) and (i.islower() is not True) and (i.isupper() is not True) and (i!=" "):
+                k=False
+                break
+    if k==False:
+        print("Chuỗi ký tự bạn nhập chưa đúng, vui lòng nhập lại!!!")
+    else:
+         break
+            
+print(transtation(S))
+ 
