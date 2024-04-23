@@ -1,0 +1,32 @@
+from itertools import product
+print(""""Dòng thứ nhất biểu diễn danh sách A, trong đó các phần tử phân tách nhau bằng một khoảng trắng.
+          Dòng thứ nhất biểu diễn danh sách B, trong đó các phần tử phân tách nhau bằng một khoảng trắng
+          Các phần tử trong danh sách A và B không trùng nhau.
+          0 < Số lượng các phần tử trong danh sách A < 30
+          0 < Số lượng các phần tử trong danh sách B < 30""")
+flag=True
+while flag:
+    a=input("Nhập danh sách A: ").split()
+    if len(a) not in range(1,30):
+        if len(a)<1:
+            print("Chưa nhập chuỗi A, hãy nhập chuỗi A!!!")
+        else:
+            print("Chuỗi A vượt quá kích thước cho phép, vui lòng nhập lại chuỗi A: ")
+    else:
+        while True:
+            b=input("Nhập danh sách B: ").split()
+            if len(b) not in range(1,30):
+                if len(b)<1:
+                    print("Chưa nhập chuỗi B, hãy nhập chuỗi B!!!")
+                else:
+                    print("Chuỗi B vượt quá kích thước cho phép, vui lòng nhập lại chuỗi B: ")
+            else:
+                break 
+        if set(a)&set(b)!=set():
+            print("Có các phần tử sau:", list(set(a)&set(b)), "cùng xuất hiện trong hai chuỗi A và B, vui lòng kiểm tra và nhập lại chuỗi A và chuỗi B")
+        else:
+            flag=False
+
+A=list(map(lambda x:int(x),a))
+B=list(map(lambda x:int(x),b))
+print("AxB = ",list(product(A,B)))
