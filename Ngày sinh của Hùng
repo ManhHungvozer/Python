@@ -1,0 +1,18 @@
+import calendar
+def find_day(i):
+    j=[i[2],i[0],i[1]]
+    week_day=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+    hung=calendar.weekday(j[0],j[1],j[2])
+    return week_day[hung]
+
+while True:
+    s=list(map(lambda x: int(x),input("Nhập thời gian bạn muốn tìm kiếm theo định dạng: ").split()))
+    if s[0] not in range(1,13):
+        print("chỉ có tối thiểu là 1 tháng và tối đa là 12 tháng, vui lòng thử lại !!!")
+    elif s[1] not in range(1,32):
+        print("chỉ có tối thiểu là ngày 1 và tối đa là ngày 30, vui lòng thử lại !!!")
+    elif s[2] not in range(1990,3001):
+        print("Vượt quá khả năng truy cập của cơ sở dữ liệu, vui lòng thử lại !!!")
+    else:
+        break
+print(find_day(s))
