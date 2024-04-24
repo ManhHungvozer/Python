@@ -1,0 +1,26 @@
+from math import pow
+print("""1 ≤ Số nguyên a ≤ 10
+         1 ≤ Số nguyên b ≤ 10
+         2 ≤ Số nguyên m ≤ 1000""")
+while True:
+    a=int(input("Nhập số nguyên a: "))
+    if a not in range(1,11):
+        print("vui lòng nhập lại!!!")
+    else:
+        while True:
+            b=int(input("Nhập số nguyên b: "))
+            if b not in range(1,11):
+                print("vui lòng nhập lại!!!")
+            else:
+                while True:
+                    m=int(input("Nhập số nguyên m: "))
+                    if m not in range(2,1001):
+                        print("vui lòng nhập lại!!!")
+                    else:
+                        break
+                break
+        break
+
+print(round(pow(a,b),0))
+print(round(pow(a,b)%m,0))
+
