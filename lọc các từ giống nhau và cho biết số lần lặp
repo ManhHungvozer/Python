@@ -1,0 +1,40 @@
+def handle(n):
+    ctkn=list(set(n))
+    print(len(ctkn))
+    vi_tri=[]
+    for i in ctkn:
+        vi_tri.append(n.index(i))
+    vi_tri.sort()
+    n_new=[]
+    for i in vi_tri:
+        n_new.append(n[i])
+    result=""
+    for i in n_new: 
+        slll=0
+        for j in n:
+            if i==j:
+                slll+=1
+        result+=str(slll)+' '
+    return result
+###################################
+print("""Các giá trị đầu vào phải thỏa mãn các điều kiện sau :
+         * 1 ≤ Số lượng từ ≤ 10^5
+         * Tổng độ dài của các từ không vượt quá 10^6
+         * Các từ chứa các chữ cái tiếng Anh viết thường""")
+
+while True:
+    n=input("Nhập số từ mà bạn muốn nhập: ")
+    if (len(n)!=1) or (ord(n) not in range(49,58)) or (int(n) not in range(1,10+1)):
+        print("Số lượng từ hoặc cú pháp không đúng theo quy định , mời nhập lạị!!!")
+    else:
+        break 
+hung=[]
+for i in range(1,int(n)+1):
+    while True:
+        s=input("Nhập từ của bạn: ").lower()
+        if len(s) not in range(1,10+1):
+            print("Từ có số ký tự không đúng quy định, vui lòng nhập lại từ theo đúng quy định!!!")
+        else:
+            hung.append(s)
+            break
+print(handle(hung))
