@@ -134,3 +134,72 @@ while flag:
                     print("This program is coded by MẠNH HÙNG!!!")
                     flag=False
                     break
+
+
+
+
+########## Part 2##########
+
+
+# Hàm xử lý
+def handle(x,y):
+    result=x.union(y)
+    return len(result)
+
+###############################################
+
+# Nhập dữ liệu đầu vào   
+print("0 < Tổng số sinh viên < 1000")
+flag=True
+while flag:
+    while True:
+        nA=input("Nhập số lượng của A: ")
+        if (nA.isdigit() is False) or int(nA) not in range(1,1000):
+            print("Dữ liệu không đúng định dạng, vui lòng nhập lại")
+        else:
+            while True:
+                a=input("Nhập danh sách A: ")
+                if len(a.split())!=int(nA):
+                    print("A đang thừa hoặc thiếu phần tử, vui lòng kiểm tra lại!!!")
+                else:
+                    A=set(a.split())
+                    while True:
+                        nB=input("Nhập số lượng của B: ")
+                        if (nB.isdigit() is False) or int(nB) not in range(1,1000):
+                            print("Dữ liệu không đúng đúng dạng, vui lòng nhập lại!!!")
+                        else:
+                            if int(nA)+int(nB)>2000:
+                                print("Số lượng vượt quá giới hạn, vui lòng kiểm tra lại!!!")
+                            else:
+                                while True:
+                                    b=input("Nhập danh sách B: ")
+                                    if len(b.split())!=int(nB):
+                                        print("B đang thừa hoặc thiếu phần tử, vui lòng kiểm tra lại!!!")
+                                    else:
+                                        B=set(b.split())
+                                        break
+                            break
+                    break
+            if handle(A,B) >1000:
+                print("Số lượng vượt quá giới hạn, vui lòng kiểm tra lại từ đầu!!!")
+            else:
+                break
+
+    # Đầu ra
+    print(handle(A,B))
+    
+    # Có muốn tiếp tục hay không
+    print("Bạn có muốn tiếp tục kiểm tra nữa hay không? Y/N")
+    while True:
+        ans=input("Nhập câu trả lời của bạn: ").upper()
+        if ans not in ["Y","N"]:
+            print("Câu trả lời không đúng đúng dạng, hãy trả lời lại!!!")
+        else:
+            if ans=="Y":
+                print("ok, tôi đã sẵn sàng!!!")
+                break
+            else:
+                print("Tạm biệt, hẹn gặp lại")
+                print("This program is coded by Manh Hung")
+                flag=False
+                break
