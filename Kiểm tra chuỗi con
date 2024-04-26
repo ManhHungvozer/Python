@@ -66,4 +66,71 @@ while flag:
                     print("This program is coded by MẠNH HÙNG!!!")
                     flag=False
                     break
-         
+
+
+
+
+
+
+
+
+
+########## Part 2##########
+
+# Hàm sử dụng
+def handle(x,y):
+    for i in y:
+        if (set(x).issuperset(set(i)) is False) or (set(x)-set(i)==set()):
+            return False
+    return True
+        
+################################################################
+
+# Điều kiện đầu vào
+print("""0 < Độ dài của tập hợp A < 501
+         0 < Số lượng các tập hợp khác < 21
+         0 < Độ dài của các tập hợp khác < 1011""")
+
+# Nhập dữ liệu đầu vào
+flag=True
+while flag:
+        while True:
+            a=input("Nhập tập hợp A: ")
+            if ((a.replace(" ","")).isdigit() is not True) or len(a.split()) not in range(0,501): 
+                print("Dữ liệu đầu vào không đúng theo quy định , vui lòng nhập lại!!!")
+            else:
+                A=list(map(lambda x: int(x),a.split()))
+                while True:
+                    n=input("Nhập số luợng các tập hợp khác: ")
+                    if ((n.isdigit() is not True) or (int(n) not in range(1,21))):
+                        print("Dữ liệu đầu vào không đúng theo quy định , vui lòng nhập lại!!!")
+                    else:
+                        N=[]
+                        for i in range(1,int(n)+1):
+                            while True:
+                                tap_hop=input("Nhập tập hợp thứ "+str(i)+": ")
+                                if ((tap_hop.replace(" ","")).isdigit() is not True) or len(tap_hop.split()) not in range(1,1011):
+                                    print("Dữ liệu đầu vào không đúng theo quy định , vui lòng nhập lại!!!")
+                                else:
+                                    N.append(list(map(lambda x: int(x),tap_hop.split())))
+                                    break
+                        break  
+                break  
+        # Xử lý
+        print(handle(A,N))
+
+        # Tiếp tục kiểm tra hay không?
+        print("Bạn có muốn tiếp tục kiểm tra?: Y/N")
+        while True:
+            ans=input("Nhập câu trả lời của bạn: ").upper()
+            if (len(ans)!=1) or (ans not in ["Y","N"]):
+                print("Câu trả lời không đúng định dạng, mời bạn nhập lại câu trả lời!!!")
+            else:
+                if ans=="Y":
+                    print("Chúng ta tiếp tục nhé!!!")
+                    break
+                else:
+                    print("Xin chào,hẹn gặp lại bạn!!!")
+                    print("This program is coded by MẠNH HÙNG!!!")
+                    flag=False
+                    break
