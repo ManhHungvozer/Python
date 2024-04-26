@@ -1,0 +1,69 @@
+# Hàm sử dụng
+def handle(h,u,n,g):
+    n_set=set(n)
+    g_set=set(g)
+    if int(h)>int(u):
+        return False
+    else:
+        if len(n_set)>len(g_set):
+            return False
+        else:
+            if set(n)-set(g)==set():
+                return True
+            else:
+                return False
+                
+################################################################
+
+# Điều kiện đầu vào
+print("""Dữ liệu đầu vào phải thỏa mãn các điều kiện sau:
+         0 < Số lượng các trường hợp < 21
+         0 < Số lượng các phần tử trong mỗi tập hợp < 1001""")
+
+# Nhập dữ liệu đầu vào
+flag=True
+while flag:
+    n_of_A=input("Nhập số phần tử của tập hợp A: ")
+    if (n_of_A.isdigit() is not True) or (int(n_of_A) not in range(1,21)):
+        print("Không đúng yêu cầu ,vui lòng nhập lại!!!")
+    else:
+        while True:
+            a=input("Nhập tập hợp A: ")
+            if ((a.replace(" ","")).isdigit() is not True) or len(a.split())!=int(n_of_A): 
+                print("Dữ liệu đầu vào không đúng theo quy định hoặc số lượng phần tử không đúng như khai báo, vui lòng nhập lại!!!")
+            else:
+                A=list(map(lambda x: int(x),a.split()))
+                while True:
+                    n_of_B=input("Nhập số phần tử của tập hợp B: ")
+                    if (n_of_B.isdigit() is not True) or (int(n_of_B) not in range(1,21)):
+                        print("Không đúng yêu cầu ,vui lòng nhập lại!!!")
+                    else:
+                        while True:
+                            b=input("Nhập tập hợp B: ")
+                            if ((b.replace(" ","")).isdigit() is not True) or len(b.split())!=int(n_of_B): 
+                                print("Dữ liệu đầu vào không đúng theo quy định hoặc số lượng phần tử không đúng như khai báo, vui lòng nhập lại!!!")
+                            else:
+                                B=list(map(lambda x: int(x),b.split()))
+                                break
+                        break
+                break
+
+        # Xử lý
+        print(handle(n_of_A,n_of_B,A,B))
+
+        # Tiếp tục kiểm tra hay không?
+        print("Bạn có muốn tiếp tục kiểm tra?: Y/N")
+        while True:
+            ans=input("Nhập câu trả lời của bạn: ").upper()
+            if (len(ans)!=1) or (ans not in ["Y","N"]):
+                print("Câu trả lời không đúng định dạng, mời bạn nhập lại câu trả lời!!!")
+            else:
+                if ans=="Y":
+                    print("Chúng ta tiếp tục nhé!!!")
+                    break
+                else:
+                    print("Xin chào,hẹn gặp lại bạn!!!")
+                    print("This program is coded by MẠNH HÙNG!!!")
+                    flag=False
+                    break
+         
