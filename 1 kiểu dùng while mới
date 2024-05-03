@@ -1,0 +1,53 @@
+import numpy 
+print("""Dòng thứ nhất biểu diễn số nguyên N.
+         N dòng tiếp theo biểu diễn N số nguyên trong mảng A, các số nguyên được được phân tách bằng một khoảng trắng.
+         N dòng tiếp theo biểu diễn N số nguyên trong mảng B, các số nguyên được được phân tách bằng một khoảng trắng.""")
+# Nhập dữ liệu
+while True:
+    s= input("Nhập số nguyên N: ")
+    if ((s.replace(" ","")).isdigit() is not True) or (len(s.split())!=1):
+        print("Sai định dạng, vui lòng nhập lại!!!")
+    else:
+        while True:
+            A=[]
+            for i in range(1,int(s)+1):
+                while True:
+                    a= input(f"Nhập mảng A thứ {i} với {int(s)} phần tử: ")
+                    if((a.replace(" ","")).isdigit() is not True) or (len(a.split())!=int(s)):
+                        print("Không đúng định dạng, xin mời nhập lại!!!")
+                    else:
+                        A.append(list(map(lambda x: int(x),a.split())))
+                        break
+            break
+        print("Đã thiết lập thành công mảng --------A--------")
+        while True:
+            B=[]
+            for i in range(1,int(s)+1):
+                while True:
+                    b= input(f"Nhập mảng B thứ {i} với {int(s)} phần tử: ")
+                    if((b.replace(" ","")).isdigit() is not True) or (len(b.split())!=int(s)):
+                        print("Không đúng định dạng, xin mời nhập lại!!!")
+                    else:
+                        B.append(list(map(lambda x: int(x),b.split())))
+                        break
+            break
+        print("Đã thiết lập thành công hai mảng ---------A và B--------")
+        # Xử lý
+        print(numpy.dot(A,B))
+        print(numpy.cross(A,B))
+
+        # Tiếp tục hay không?
+        print("Bạn có muốn tiếp tục không?: Y/N")
+        while True:
+            ans=input("Nhập câu trả lời của bạn: ").upper()
+            if len(ans)!=1 or ans not in ["Y","N"]:
+                print("Câu trả lời sai địng dạng, vui lòng trả lời lại!!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, tôi đã sẵn sàng")
+        else:
+            print("Xin chào, hẹn gặp lại !!!!!")
+            break    
+
+    
