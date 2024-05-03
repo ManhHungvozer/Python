@@ -1,0 +1,62 @@
+def score_work(x):
+    tsgt=[]
+    for i in x.split():
+        sna=0
+        for j in i:
+            if j in ["a","e","i","o","u"]:
+                sna+=1
+        tsgt.append(sna)
+    gtgl=0
+    for k in tsgt:
+        if k%2==0:
+            gtgl+=2
+        else:
+            gtgl+=1
+    return gtgl
+
+print("""Dữ liệu đầu vào phải thỏa mãn:
+         1 ≤ Số lượng các từ < 20
+         Mỗi từ có nhiều nhất 20 chữ cái và các chữ cái đều viết thường.""")
+flag=True
+while flag:
+    while True:
+        n=input("Nhập số lượng từ: ")
+        if (n.isdigit() is False) or (int(n) not in range(1,20)):
+            print("Dữ liệu đầu vào sai định dạng, vui lòng nhập lại")
+        else:
+            while True:
+                string =input("Nhập dữ chuỗi ký tự của bạn: ").lower()
+                if len(string.split())!=int(n):
+                    print("Số lượng từ không đúng theo quy định đã thiết lập phía trên, vui lòng nhập lại!!!")
+                else:
+                    false=0
+                    vi_tri_sai=""
+                    for i in string.split():
+                        if (i.isalpha() is False) or len(i) not in range(1,20):
+                            print("Mỗi từ có nhiều nhất 20 chữ cái và các chữ cái đều viết thường")
+                            false+=1
+                            vi_tri_sai += str(i)+","
+                    if false!=0:
+                        print("Phát hiện ra" + str(false) + " chỗ sai tại các vị trí: " + vi_tri_sai + "hãy sửa lại cho đúng")
+                    else:
+                        break
+            break
+
+    #Xử lý
+    print(score_work(string))
+
+    # Có muốn tiếp tục hay không
+    print("Bạn có muốn tiếp tục kiểm tra nữa hay không? Y/N")
+    while True:
+        ans=input("Nhập câu trả lời của bạn: ").upper()
+        if ans not in ["Y","N"]:
+            print("Câu trả lời không đúng đúng dạng, hãy trả lời lại!!!")
+        else:
+            if ans=="Y":
+                print("ok, tôi đã sẵn sàng!!!")
+                break
+            else:
+                print("Tạm biệt, hẹn gặp lại")
+                print("This program is coded by Manh Hung")
+                flag=False
+                break
