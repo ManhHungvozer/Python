@@ -1,0 +1,36 @@
+import numpy 
+print("""Dòng thứ nhất biểu diễn số nguyên N và M, trong đó hai số nguyên này được phân tách bằng một khoảng trắng.
+         N dòng tiếp theo biểu diễn M số nguyên trong mảng A, các số nguyên được được phân tách bằng một khoảng trắng.
+         N dòng tiếp theo biểu diễn M số nguyên trong mảng B, các số nguyên được được phân tách bằng một khoảng trắng.""")
+while True:
+    s= input("Nhập hai số nguyên M và N: ")
+    if (s.replace(" ","").isdigit() is not True) or (len(s.split())!=2):
+        print("Sai định dạng, vui lòng nhập lại!!!")
+    else:
+        while True:
+            for i in range(0,int(s.split()[0])):
+                a= input(f"Nhập mảng A với {s.split()[1]} phần tử: ")
+            if((a.replace(" ","")).isdigit() is not True) or (len(a.split())!=int((s.split())[1])):
+                print("Không đúng định dạng, xin mời nhập lại!!!")
+            else:
+                A=list(map(lambda x: int(x), a.split()))
+                while True:
+                    for i in range(0,int(s.split()[0])):
+                        b= input(f"Nhập mảng B với {s.split()[1]} phần tử: ")
+                    if((b.replace(" ","")).isdigit() is not True) or (len(b.split())!=int((s.split())[1])):
+                        print("Không đúng định dạng, xin mời nhập lại!!!")
+                    else:
+                        B=list(map(lambda x: int(x), b.split()))
+                        break
+                break
+        break
+
+
+x=numpy.array(A,float)
+y=numpy.array(B,float)
+print(x+y)
+print(x-y)
+print(x*y)
+print(x//y)
+print(x%y)
+print(x**y)
