@@ -1,0 +1,33 @@
+from operator import itemgetter
+print("""Dòng thứ nhất biểu diễn số nguyên N, biểu thị số lượng người.
+         Trong N dòng tiếp theo, mỗi dòng lần lượt biểu diễn họ, tên, tuổi và giới tính của một người, các giá trị này được phân tách bằng một khoảng trắng.
+         1 ≤ Số lượng người trong danh sách ≤ 10""")
+while True:
+    n=input("Nhập số lượng người: ").replace(" ","")
+    if n.isdigit() is not True or int(n) not in range(1,11):
+        print("Error, please try again !!!")
+    else:
+        danh_sach=[]
+        for i in range(1,(int(n)+1)):
+            while True:
+                s=input(f"Nhập người thứ {i}: ").split()
+                if len(s)!=3 or s[0].isalpha() is not True or s[1].isdigit() is not True or s[2].upper() not in ["M","F"]:
+                    print("Error, please try again !!!")
+                else:
+                    break
+            danh_sach.append({"name":(s[0].title()), "age":(int(s[1])), "stt":i})
+        sap_xep=sorted(danh_sach,key= itemgetter("age","stt"))
+        for i in sap_xep:
+            print(i["name"])
+        print("You want to continue ?: Y/N")
+        while True:
+            ans=input("Nhập câu trả lời của bạn: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, let's continue")
+        else:
+            print("See you again !!!")
+            break
