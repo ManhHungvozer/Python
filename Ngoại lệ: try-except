@@ -1,0 +1,37 @@
+import numpy
+print("""Dòng thứ nhất biểu diễn các phần tử trong mảng A, trong đó các phần tử phân tách nhau bằng một khoảng trắng.
+         Dòng thứ hai biểu diễn các phần tử trong mảng B, trong đó các phần tử phân tách nhau bằng một khoảng trắng""")
+while True:
+    a=input("Nhập mảng A: ")
+    if ((a.replace(".","")).replace(" ","")).isdigit() is not True:
+        print("Error, please try again!!!")
+    else:
+        a_new=list(map(lambda x: float(x), a.split()))
+        print("ĐÃ NHẬP XONG MẢNG A!!!")
+        while True:
+            b=input("Nhập mảng B: ")
+            if ((b.replace(".","")).replace(" ","")).isdigit() is not True:
+                print("Error, please try again!!!")
+            else:
+                b_new=list(map(lambda x: float(x), b.split()))
+                print("ĐÃ NHẬP XONG MẢNG B")
+                break
+        A=numpy.array(a_new)
+        B=numpy.array(b_new)
+        try:
+            print(numpy.outer(A,B))
+            print(numpy.inner(A,B)) 
+        except :
+            print("Errorr, please try again!!!")
+            continue
+        print("Do you want to continue?: Y/N")
+        while True:
+            ans=input("Your ansewer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again")
+            else:
+                break
+        if ans=="Y":
+            print("ok, Let's continue!!!")
+        else:
+            break 
