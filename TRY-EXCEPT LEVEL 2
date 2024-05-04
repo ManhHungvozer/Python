@@ -1,0 +1,61 @@
+#Nhập module sử dụng 
+import numpy
+
+#Bộ máy xử lý
+while True:
+    #Nhập dữ liệu
+    s=input("import array s: ")
+    if (len(s.split())!=9) or (((s.replace(" ","")).replace(".","")).isdigit() is not True):
+        print("Error, please try again !!!")
+    else:
+        S=list(map(lambda x: float(x), s.split()))
+        string=numpy.array(S)
+        while True:
+            so_hang =input("Nhập số hàng của mảng: ").replace(" ","")
+            if so_hang.isdigit() is not True:
+                print("Error, please try again !!!")
+            else:
+                so_hang_final=int(so_hang)
+                while True:
+                    so_cot=input("Nhập số cột của mảng: ").replace(" ","")
+                    if so_cot.isdigit() is not True:
+                        print("Error, please try again !!!")
+                    else:
+                        so_cot_final=int(so_cot)
+                        break
+                # xử lý và dữ liệu
+                try:
+                    string_new=numpy.reshape(string,(so_hang_final, so_cot_final))
+                    print (string_new)
+                    # Hỏi có muốn tiếp tục không ?
+                    print("Would you like to try a different arrangement ?: Y/N")
+                    while True:
+                        ans1=input("Your answer is: ").upper()
+                        if ans1 not in ["Y","N"]:
+                            print("Error, please try again !!!")
+                        else:
+                            break
+                    if ans1=="Y":
+                        print("OK, Let's continue !!!")
+                    else:
+                        print("OK !!!")
+                        break
+                except ValueError:
+                    print("ValueError, please try again !!!")
+                    continue
+        # Hỏi có muốn tếp tục không ?
+        print("You want to continue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, Let's continue !!!")
+        else:
+            break
+        
+# Kết thúc
+print("See you again !!!")
+print("This programming is coded by Manh HUNG")
