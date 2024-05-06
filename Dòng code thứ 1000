@@ -1,0 +1,100 @@
+# Các hàm sử dụng:
+# Cách 1:
+def xap_xep_danh_sach_1(s):
+    danh_sach_diem=[]
+    for i in s:
+        danh_sach_diem.append(i[1])
+    danh_sach_diem_new=[]
+    for i in danh_sach_diem:
+        if i!=max(danh_sach_diem):
+            danh_sach_diem_new.append(i)
+    danh_sach_final=[]
+    for i in s:
+        if i[1]==max(danh_sach_diem_new):
+            danh_sach_final.append(i[0])
+    for i in sorted(danh_sach_final):
+        print(i)
+# Cách 2:
+from operator import itemgetter
+def xap_xep_danh_sach_2(s):
+    danh_sach_diem=[]
+    for i in s:
+        danh_sach_diem.append(i[1])
+    danh_sach_diem_new=[]
+    for i in danh_sach_diem:
+        if i!=max(danh_sach_diem):
+            danh_sach_diem_new.append(i)
+    danh_sach_dirictory=[]
+    for i in s:
+        if i[1]==max(danh_sach_diem_new):
+            danh_sach_dirictory.append({"name":i[0], "score":i[1]})
+    danh_sach_final=sorted(danh_sach_dirictory,key=itemgetter("score","name"))
+    for i in danh_sach_final:
+        print(i["name"])
+        
+################################################
+
+# Nhập dữ liệu
+# Điều kiện đầu vào
+print("""Dữ liệu đầu vào tuan theo các điều kiện sau:
+         Dòng thứ nhất biểu diễn số nguyên N, chỉ định số lượng học sinh.
+         2N dòng tiếp theo biểu diễn tên và điểm của học sinh trên hai dòng riêng biệt:
+         - Dòng thứ nhất biểu diễn tên học sinh.
+         -Dòng thứ hai biểu diễn điểm số của học sinh.
+         Điều kiện
+         2 ≤ Tổng số học sinh ≤ 5
+         Luôn tồn tại một hoặc nhiều học sinh có điểm thấp thứ hai.""")
+# Nhập dữ liệu đầu vào
+while True:
+    n=input("Nhập số lượng học sinh: ")
+    if (n.isdigit() is not True) or (int(n) not in range(2,6)):
+        print("Error, please try again !!!")
+    else:
+        while True:
+            danh_sach_hoc_sinh=[]
+            score_list=[]
+            for i in range (1,int(n)+1):
+                while True:
+                    name=input(f"Nhập tên học sinh thứ {i}: ")
+                    if (name.replace(" ","")).isalpha() is not True:
+                        print("Error, please try again.")
+                    else:
+                        while True:
+                            score=input(f"Nhập điểm số của {name}: ")
+                            if (score.isdigit() is not True) or (int(score) not in range(0,11)):
+                                print("Error, please try again !")
+                            else:
+                                break
+                        break
+                score_list.append(int(score))
+                danh_sach_hoc_sinh.append([name,int(score)])
+            if max(score_list)==min(score_list):
+                print("Error, please!!!")
+            else:
+                break
+        print(danh_sach_hoc_sinh)
+        # Xử lý
+        # Cách 1:
+        print("Xử lý bằng cách 1: ")
+        xap_xep_danh_sach_1(danh_sach_hoc_sinh)
+        # Cách 2:
+        print("Kết quả xử lý bằng cách 2: ")
+        xap_xep_danh_sach_2(danh_sach_hoc_sinh)
+
+        # Vòng lặp kết thúc
+        print("You want to continue?: Y/N")
+        while True:
+            ans=input("Nhập câu trả lời của bạn: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again!!!")
+            else:
+                break
+        if ans=="Y":
+            print("Ok, let's continue !!!")
+        else:
+            break
+
+# Kết thúc chương trình
+print("See you again !!!")
+print("This programming is coded by Manh Hung")
+print("This is the 100th line of code of Manh Hung")
