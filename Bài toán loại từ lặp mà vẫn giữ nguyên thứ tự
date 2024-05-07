@@ -1,0 +1,60 @@
+# Các hàm xử lý
+def merge_the_tools(s,k):
+    n=len(s)//k
+    s_new=[]
+    for i in range(0,n):
+        s_new.append(s[i*k:(i+1)*k])
+    S=[]
+    for i in s_new:
+        S.append(list(set(i)))
+    dscs=[]
+    for i in range(0,len(s_new)):
+        dscsp=[]
+        for j in S[i]:
+            dscsp.append(s_new[i].index(j))
+        dscs.append(sorted(dscsp))
+    for i in range(len(s_new)):
+        S_final=""
+        for j in dscs[i]:
+            S_final+=s_new[i][j]
+        print(S_final)
+
+##################################################################################
+
+# Nhập dữ liệu đầu vào 
+print("""Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn chuỗi s.
+         - Dòng thứ hai biểu diễn số nguyên k, chỉ định độ dài của các chuỗi con.
+         Điều kiện
+         1 ≤ Độ dài của chuỗi s ≤  10^4 
+         1 ≤ Số nguyên k ≤ Độ dài của chuỗi s
+         n là bội số của k.""")
+
+while True:
+    string=input("Nhập chuỗi ký tự : ")
+    if len(string) not in range(1,100):
+        print("Error, please try again !!!")
+    else:
+        while True:
+            he_so=input("Nhập hệ số k: ")
+            if (he_so.isdigit() is not True) or (len(string)%int(he_so)!=0):
+                print("Error, please try again")
+            else:
+                break
+        # Xử lý
+        merge_the_tools(string,int(he_so))
+        # tiếp tục hay không?
+        print("You want to continue ?: Y/N")
+        while True:
+            ans=input("Yours answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!)")
+            else:
+                break
+        if ans=="Y":
+            print("OK, Let's continue !!!")
+        else:
+            break
+# Kết thúc
+print("See you again !!!")
+print("This programming is coded by MANH HUNG")
