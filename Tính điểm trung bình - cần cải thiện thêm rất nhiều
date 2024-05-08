@@ -1,0 +1,36 @@
+# Nhập dữ liệu đầu vào:
+from collections import namedtuple 
+ds_hoc_sinh=namedtuple("ds_hoc_sinh",("ID,CLASS,NAME,SCORE"))
+print("""Định dạng đầu vào
+         - Dòng thứ nhất biểu diễn số nguyên N, chỉ định số lượng sinh viên.
+         - Dòng thứ hai biểu diễn tên của các cột (tên, mã số sinh viên, lớp và điểm) theo thứ tự bất kỳ.
+         - N dòng tiếp theo biểu diễn tên, mã số sinh viên, lớp và điểm của từng học sinh theo thứ tự của dòng thứ hai.
+         Điều kiện
+         - 0 < Số lượng sinh viên ≤ 100""")
+while True:
+    n=input("Nhập số lượng sinh viên: ").replace(" ","")
+    if n.isdigit() is not True or int(n) not in range(1,101):
+        print("Error, please try again !!!")
+    else:
+        S=0
+        print("ID CLASS NAME SCORE")
+        for i in range(1,int(n)+1):
+            s=input(f"Nhập thông tin của học sinh thứ {i} theo thứ tự trên: ").split()
+            hoc_sinh=ds_hoc_sinh(s[0],s[1],s[2],s[3])
+            S+=int(hoc_sinh.SCORE)
+        print(round(S/int(n),3))
+        # tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
