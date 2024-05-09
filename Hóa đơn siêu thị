@@ -1,0 +1,46 @@
+from collections import OrderedDict
+# Nhập dữ liệu đầu vào:
+print("""Cho danh sách N mặt hàng và giá của chúng mà đã được mua vào một ngày cụ thể. 
+         Bạn hãy in các item_name và net_price lần lượt theo thứ tự mà người tiêu dùng mua chúng, trong đó:
+         item_name: Tên mặt hàng. 
+         net_price: Số lượng mặt hàng x giá của từng mặt hàng
+         Định dạng đầu vào
+         - Dòng thứ nhất biểu diễn số lượng mặt hàng, N.
+         - N dòng tiếp theo biểu diễn tên và giá của từng mặt hàng, hai giá trị này được phân tách bằng một khoảng trắng.
+         Điều kiện
+         - 0 < Số lượng mặt hàng ≤ 100""")
+# Nhập dữ liêu
+while True:
+    n=input("Nhập số lượng mặt hàng của siêu thị: ").replace(" ","")
+    if n.isdigit() is not True or int(n) not in range(1,101):
+        print("Error, please try again !!!")
+    else:
+        danh_sach_1=[]
+        danh_sach=OrderedDict()
+        for i in range(1,int(n)+1):
+            while True:
+                s=input(f"Nhập tên và giá trị của mặt hàng thứ {i}: ").split()
+                if s[0].isalpha() is not True or s[1].isdigit() is not True:
+                    print("Error, please try again !!!")
+                else:
+                    danh_sach_1.append((s[0],int(s[1])))
+                    break
+        for i in set(danh_sach_1):
+            danh_sach[i[0]]=int(i[1])*(danh_sach_1.count(i))
+        for i,j in danh_sach.items():
+            print(i,j)
+        # tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
