@@ -78,3 +78,97 @@ while True:
 # Kết thúc chương trình
 print("See you again !!!")
 print("This programming is coded by Manh Hung")
+
+
+--------------------------------------------------part 2------------------------------------
+
+
+
+# Nhập dữ liệu đầu vào:
+from collections import deque
+print("""Định dạng đầu vào
+         - Dòng thứ nhất biểu diễn số nguyên N, chỉ định số lượng phương thức.
+         - N dòng tiếp theo biểu diễn tên của các phương thức và giá trị của chúng, 
+           trong đó tên phương thức và giá trị của nó được phân cách nhau bằng một khoảng trắng.
+         Điều kiện
+         - 0 < Số lượng phương thức ≤ 100""")
+# Nhập dữ liệu:
+while True:
+    n=input("Nhập số lượng các phương thức: ").replace(" ","")
+    if n.isdigit() is False or int(n) not in range(1,101):
+        print("Error, please try again !!!")
+    else:
+        phuong_thuc=[]
+        for i in range(1,int(n)+1):
+            while True:
+                s=input("Nhập tên phương thức và giá trị liện quan: ").split()
+                if s[0] in ["pop","popleft","clear","reverse"]:
+                    phuong_thuc.append((s[0],0))
+                    break
+                elif s[0] in ["append","appendleft","extend","extendleft","remove","removeleft","rotate","count"]:
+                    if len(s)!=2:
+                        print("Error, please try again !!!")
+                    else:
+                        phuong_thuc.append((s[0],s[1]))
+                        break
+                else:
+                    print("Error, please try again !!!")
+        # Xử lý:
+        d=deque()
+        for i in phuong_thuc:
+            if i[0]=="pop":
+                try:
+                    d.pop()
+                except KeyError:
+                    continue
+            elif i[0]=="popleft":
+                try:
+                    d.popleft()
+                except:
+                    continue
+            elif i[0]=="clear":
+                d.clear()
+            elif i[0]=="reverse":
+                d.reverse()
+            elif i=="append":
+                d.append(s[1])
+            elif i=="appendleft":
+                d.appendleft(s[1])
+            elif i=="extend":
+                d.extend(s[1])
+            elif i=="extendleft":
+                d.extendleft(s[1])
+            elif i=="remove":
+                try:
+                    d.remove(s[1])
+                except KeyError:
+                    continue
+            elif i=="removeleft":
+                try:
+                    d.removeleft(s[1])
+                except:
+                    continue
+            elif i=="rotate":
+                d.rotate(s[1])
+            elif i=="count":
+                try:
+                    d.count(s[1])
+                except:
+                    continue
+        # Kết quả
+        print(d)
+        # Vòng lặp kết thúc
+        print("You want to continue?: Y/N")
+        while True:
+            ans=input("Nhập câu trả lời của bạn: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again!!!")
+            else:
+                break
+        if ans=="Y":
+            print("Ok, let's continue !!!")
+        else:
+            break
+# Kết thúc chương trình
+print("See you again !!!")
+print("This programming is coded by Manh Hung")
