@@ -1,0 +1,75 @@
+# Nhập dữ liệu đầu vào
+print("""Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn số lượng các phần tử trong tập hợp A.
+         - Dòng thứ hai biểu diễn các phần tử trong tập hợp A, trong đó các giá trị được phân tách nhau bằng một khoảng trắng
+         - Dòng thứ ba biểu diễn số nguyên N, chỉ định số lượng các tập hợp khác.
+         - 2N dòng tiếp theo được chia thành N phần, mỗi phần bao gồm 2 dòng:
+          + Dòng thứ nhất biểu diễn tên phương thức và độ dài của tập hợp, hai giá trị này được phân tách nhau bằng một khoảng trắng.
+          + Dòng thứ hai biểu diễn các phần tử trong tập hợp đó, mỗi phần tử được phân tách nhau bằng một khoảng trắng.
+         Điều kiện
+         - 0 < Độ dài của tập hợp A < 1000
+         - 0 < Độ dài của tập hợp khác < 100
+         - 0 < Số nguyên N < 100""")
+# Nhập dữ liệu
+while True:
+    n_A=input("Nhập số lượng các phần tử trong tập hợp A: ").replace(" ","")
+    if n_A.isdigit() is not True or int(n_A) not in range(1, 1000):
+        print("Error, please try again !!!")
+    else:
+        while True:
+            A=input("Nhập tập hợp A: ")
+            if (A.replace(" ","")).isdigit() is not True or len(A.split())!= int(n_A):
+                print("Error, please try again !!!")
+            else:
+                set_A=set(map(int,A.split()))
+                while True:
+                    N=input("Nhập số lượng các tập hợp khác: ").replace(" ","")
+                    if N.isdigit() is not True or int(N) not in range(1,100):
+                        print("Error, please try again !!!")
+                    else:
+                        s=[]
+                        for i in range(1,int(N)+1):
+                            while True:
+                                N_1=input(f"Nhập tên phương thức và độ dài của tập hợp thứ {i}: ").split()
+                                if N_1[0] not in ["update","intersection_update","difference_update","symmetric_difference_update"] or (N_1[1].isdigit() is not True or int(N_1[1]) not in range(1,100)):
+                                    print("Error, please try again !!!")
+                                else:
+                                    while True:
+                                        N_2=input(f"Nhập chuỗi của tập hợp thứ {i}: ")
+                                        if (N_2.replace(" ","")).isdigit() is not True or len(N_2.split())!= int(N_1[1]):
+                                            print("Error, please try again !!!")
+                                        else:
+                                            set_N=set(map(lambda x: int(x),N_2.split()))
+                                            break
+                                    break
+                            s.append((N_1[0],set_N))
+                        break
+                break
+        # Xử lý:
+        for i in s:
+            if i[0]=="update":
+                set_A.update(i[1])
+            elif i[0]=="intersection_update":
+                set_A.intersection_update(i[1])
+            elif i[0]=="difference_update":
+                set_A.difference_update(i[1])
+            else:
+                set_A.symmetric_difference_update(i[1])
+        # Kết quả:
+        print("Tổng của các phần tử trong A sau khi biến đổi là :",sum(list(set_A)))
+        # Vòng lặp kết thúc
+        print("You want to continue?: Y/N")
+        while True:
+            ans=input("Nhập câu trả lời của bạn: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again!!!")
+            else:
+                break
+        if ans=="Y":
+            print("Ok, let's continue !!!")
+        else:
+            break
+# Kết thúc chương trình
+print("See you again !!!")
+print("This programming is coded by Manh Hung")
+print("This is the 100th line of code of Manh Hung")
