@@ -1,0 +1,36 @@
+# Nhập dữ liệu đầu vào
+print("""Định dạng đầu vào:
+         - Là một dòng đơn biểu diễn chuỗi S.
+         Điều kiện
+         - 3 < Độ dài của chuỗi S ≤ 10^4
+         - Chuỗi S chứa ít nhất ba ký tự khác nhau.
+         Định dạng đầu ra
+         - Đầu ra hiển thị ba ký tự phổ biến nhất cùng với tần suất của chúng, mỗi ký tự hiển thị trên một dòng riêng biệt.
+         - Các ký tự được sắp xếp theo thứ tự số lần xuất hiện giảm dần.
+         - Nếu số lần xuất hiện giống nhau, các ký tự được sắp xếp theo thứ tự bảng chữ cái.""")
+while True:
+    s=input("Nhập chuỗi S: ").strip()
+    if len(set(s))<3 or len(s) not in range(3,100001):
+        print("Error, please try again !!!")
+    else:
+        danh_sach={}
+        for i in set(s):
+            danh_sach.update({i:s.count(i)})
+        danh_sach_new=(list(sorted(danh_sach.items(), key=lambda x:(x[1]),reverse=True,)))[0:3]
+        for i in danh_sach_new:
+            print(i[0],i[1])
+        # Vòng lặp kết thúc
+        print("You want to continue?: Y/N")
+        while True:
+            ans=input("Nhập câu trả lời của bạn: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again!!!")
+            else:
+                break
+        if ans=="Y":
+            print("Ok, let's continue !!!")
+        else:
+            break
+# Kết thúc chương trình
+print("See you again !!!")
+print("This programming is coded by Manh Hung")
