@@ -34,3 +34,58 @@ while True:
 # Kết thúc chương trình
 print("See you again !!!")
 print("This programming is coded by Manh Hung")
+
+
+
+--------------------------
+
+# Điều kiện:
+print("""Cho chuỗi S chứa các ký tự chữ và số, bạn hãy sắp xếp chuỗi S theo thứ tự sau:
+         - Các ký tự viết thường nằm trước các ký tự in hoa.
+         - Các ký tự viết hoa nằm trước các chữ số.
+         - Các số lẻ nằm trước các số chẵn.
+         Định dạng đầu vào
+         - Là một dòng đơn biểu diễn chuỗi ký tự S.
+         Điều kiện
+         - 0 < Độ dài chuỗi ký tự S < 1000
+         Định dạng đầu ra
+         - Đầu ra hiển thị chuỗi S đã được sắp xếp thoả mãn các điều kiện trên.""")
+
+# Nhập dữ liệu đầu vào:
+while True:
+    chu_thuong=""
+    chu_viet_hoa=""
+    chu_so=""
+    s=input("Nhập chuỗi S: ").replace(" ","")
+    if s.isalnum() is False:
+        print("Error, please try again !!!")
+    else:
+        for i in s:
+            if i.isdigit() is True:
+                chu_so+=i
+            elif i.isupper() is True:
+                chu_viet_hoa+=i
+            else: #islower()
+                chu_thuong+=i
+    # Xử lý
+    chu_thuong_new=str("".join(sorted(chu_thuong)))
+    chu_viet_hoa_new=str("".join(sorted(chu_viet_hoa)))
+    chu_so_new=str("".join(sorted(chu_so)))
+
+    print(chu_thuong_new+chu_viet_hoa_new+chu_so_new)
+    
+    # Vòng lặp kết thúc
+    print("You want to continue?: Y/N")
+    while True:
+        ans=input("Nhập câu trả lời của bạn: ").upper()
+        if ans not in ["Y","N"]:
+            print("Error, please try again!!!")
+        else:
+            break
+    if ans=="Y":
+        print("Ok, let's continue !!!")
+    else:
+        break
+# Kết thúc chương trình
+print("See you again !!!")
+print("This programming is coded by Manh Hung")
