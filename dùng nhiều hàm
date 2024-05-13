@@ -1,0 +1,58 @@
+# Hàm sử dụng
+def replace_kytu(string,loai_bo,thay_the):
+    for i in loai_bo:
+        string=string.replace(i,thay_the)
+    return string
+
+def float_ngoai_le(x):
+    try:
+        float(x)
+        return True
+    except:
+        return False
+    
+def kiem_tra_dau_phay_dong(x):
+    if (x[0]=="+") and (x.count(".")==1) and (x.count("-")==0) and (x[-1].isdigit() is True) and (replace_kytu(x,["+","-","."],"").isdigit() is True) and float_ngoai_le(x) is True:
+        return True
+    elif (x[0]=="-") and (x.count(".")==1) and (x.count("+")==0) and (x[-1].isdigit() is True) and (replace_kytu(x,["+","-","."],"").isdigit() is True) and float_ngoai_le(x) is True:
+        return True
+    else:
+        return False
+    
+# Điều kiện: 
+print("""Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn số thực T, chỉ định số lượng các trường hợp.
+         - T dòng tiếp theo biểu thị các chuỗi N, mỗi chuỗi trên một dòng riêng biệt.
+         Điều kiện
+         - 0 < Số lượng các trường hợp < 10""")
+#Nhập dữ liệu:
+while True:
+    t=input("Nhập số lượng trường hợp muốn kiểm tra: ").replace(" ","")
+    if t.isdigit() is False or int(t) not in range(1,10):
+        print("Error, please try again !!!")
+    else:
+        danh_sach=[]
+        for i in range(1,int(t)+1):
+            s=input(f"Nhập trường hợp thứ {i}: ")
+            danh_sach.append(s)
+    # Xử lý
+    danh_sach_new=[]
+    for i in danh_sach:
+        print(kiem_tra_dau_phay_dong(i))
+    
+    # Vòng lặp kết thúc
+    print("You want to continue?: Y/N")
+    while True:
+        ans=input("Nhập câu trả lời của bạn: ").upper()
+        if ans not in ["Y","N"]:
+            print("Error, please try again!!!")
+        else:
+            break
+    if ans=="Y":
+        print("Ok, let's continue !!!")
+    else:
+        break
+# Kết thúc chương trình
+print("See you again !!!")
+print("This programming is coded by Manh Hung")
+            
