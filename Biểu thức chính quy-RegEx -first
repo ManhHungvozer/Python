@@ -1,0 +1,29 @@
+import re
+while True:
+    bieu_thuc=r'^[0-9]+([,.][0-9]+)*$'
+    string=input("Nhập chuỗi S: ")
+    if re.match(bieu_thuc,string):
+        print("Chuỗi hợp lệ, sau đây là kết quả xử lý: ")
+        pattern=r'[,\.]'
+        result=re.split(pattern,string)
+        print(result)
+        for i in result:
+           print(i)
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            # kết thúc
+            print("SEE YOU AGAIN !!!")
+            print("This programming is coded by MANH HUNG !!!")
+            break
+    else:
+        print("Chuỗi không phù hợp với biểu thức chính quy đã quy định vui lòng nhập lại !!!")
+        
