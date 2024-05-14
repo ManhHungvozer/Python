@@ -1,0 +1,48 @@
+import re
+# Nhập dữ liệu:
+print("""Yêu cầu:
+         Cho số nguyên N và N địa chỉ email, bạn hãy in danh sách chứa các địa chỉ email hợp lệ theo thứ tự từ điển.
+         Địa chỉ email hợp lệ thoả mãn các quy tắc sau:
+         - Có định dạng chung là username@websitename.extension.
+         - Tên người dùng (username) chỉ chứa các ký tự chữ, ký tự số, dấu gạch ngang, dấu gạch dưới [a - z], [A - Z], [0 - 9], [_-].
+         - Tên trang Web (websitename) chỉ chứa các ký tự chữ và số [a - z], [A - Z], [0 - 9].
+         - Phần mở rộng (extension) chỉ chứa các ký tự chữ [a - z], [A - Z] và có độ dài tối đa là 3 ký tự.
+         Định dạng đầu vào
+         - Dòng thứ nhất biểu diễn số nguyên N, chỉ định số lượng địa chỉ email.
+         - N dòng tiếp theo lần lượt biểu diễn các chuỗi địa chỉ email.
+         Điều kiện
+         - Mỗi dòng biểu diễn một chuỗi địa chỉ email, không chứa các chuỗi trống.""")
+while True:
+    n=input("Nhập số lượng địa chỉ email cần kiểm tra: ")
+    if n.isdigit() is False:
+        continue
+    else:
+        danh_sach=[]
+        for i in range(1,int(n)+1):
+            s=input(f"Nhập danh địa chỉ email thứ {i}: ")
+            danh_sach.append(s)
+        # Xử lý
+        danh_sach_hop_le=[]
+        pattern=r'([a-zA-Z0-9_-]*)@([a-zA-Z0-9]*)[\.]([a-zA-Z]{1,3})'
+        for i in danh_sach:  
+            if re.match(pattern,i):
+                danh_sach_hop_le.append(i)
+        print(danh_sach_hop_le)
+        danh_sach_final=sorted(danh_sach_hop_le)
+        print(danh_sach_final)
+
+        # tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
