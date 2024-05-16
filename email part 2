@@ -1,0 +1,42 @@
+import re
+import email.utils
+# Nhập dữ liệu:
+while True:
+    n=input("Nhập số email: ")
+    if n.isdigit() is False or int(n) not in range(1,100):
+        print("Error, please try again !!!")
+    else:
+        danh_sach=[]
+        pattern_1=r'([a-zA-Z0-9]+)\s(6[<][a-zA-Z0-9]*)>$'
+        for i in range(1,int(n)+1):
+            while True:
+                s=input("Nhập thông tin: ")
+                match_1=re.match(pattern_1,s)
+                if match_1:
+                    danh_sach.append(s)
+                    break
+                else:
+                    print("Error, please try again !!!")
+        # Xử lý
+        pattern=r'(^[A-Za-z][A-Za-z0-9-_\.]+)@([A-Za-z]+)\.([A-Za-z]{1,3})'
+        for i in danh_sach:
+            name,gmail=email.utils.parseaddr(i)
+            match=re.match(pattern,gmail)
+            if match:
+                print(i)
+
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
