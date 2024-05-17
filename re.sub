@@ -1,0 +1,57 @@
+# Nhập module
+import re
+
+# Đề bài:
+print("""Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn số nguyên N.
+         - N dòng tiếp theo lần lượt biểu diễn các dòng trong đoạn văn bản.
+         Điều kiện:
+         - 0 < Số nguyên N < 100
+         - Hai ký tự && và || đều không nằm ở đầu và cuối mỗi dòng.
+         Định dạng đầu ra:
+         - Đầu ra hiển thị đoạn văn bản đã sửa đổi.""")
+
+# Nhập dữ liệu:
+while True:
+    n=input("Nhập số nguyên N: ").replace(" ","")
+    if n.isdigit() is False or int(n) not in range(1,100):
+        print("Error, please try again !!!")
+    else:
+        pattern=r'^(?!&&)(?!\|\|).*(?<!&&)(?<!\|\|)$'
+        danh_sach=[]
+        for i in range(1,int(n)+1):
+            while True:
+                s=input(f"Nhập chuỗi thứ {i} để kiểm tra: ")
+                match_1=re.match(pattern,s)
+                if match_1:
+                    danh_sach.append(s)
+                    break
+                else:
+                    print("Error, please try again !!!")
+        
+        #Xử lý:
+        pattern_1=r'\s&&\s'
+        pattern_2=r'\s\|\|\s'
+        #pattern_1=r'\s(&&|\|\|)\s'
+        replace_1=" and "
+        replace_2=" or "
+        for string in danh_sach:
+            string_new=re.sub(pattern_1,replace_1,string)
+            string_final=re.sub(pattern_2,replace_2,string_new)
+            print(string_final)
+        
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
