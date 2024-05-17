@@ -1,0 +1,64 @@
+import re
+# Nhập dữ liệu:
+print("""Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn N, biểu thị số lượng dòng mã.
+         - N dòng tiếp theo lần lượt biểu diễn các dòng mã CSS.
+         Điều kiện:
+         - 0 < Số lượng các dòng mã < 50
+         Định dạng đầu ra:
+         - Đầu ra hiển thị các mã màu CSS cùng với ký hiệu # trên các dòng riêng biệt.""")
+
+# Nhập dữ liệu:
+while True:
+    n=input("Nhập số nguyên N: ")
+    hop_le=re.match(r'^[0-4][0-9]$',n)
+    if hop_le:
+        CSS=""
+        for i in range(1,int(n)+1):
+            while True:
+                code=input(f"Nhập dòng mã thứ {i}: ")
+                hop_le_1 = re.match(r'^(?!.*(?:\/\/|\/\*\*\/)).*$', code)
+                if hop_le_1:
+                    CSS+=code 
+                else:
+                    print("Error, please try again !!!")
+        print(CSS)
+        # Cách 1:
+        pattern_1=r'#[0-9a-fA-F]{3}'
+        match_1=re.findall(pattern_1,CSS)
+        if match_1:
+            for i in match_1:
+                print(i)
+        pattern_2=r'#[0-9a-fA-F]{6}'
+        match_2=re.findall(pattern_2,CSS)
+        if match_2:
+            for i in match_2:
+                print(i)
+        
+        # Cách 2:
+        pattern_3=r'#[1-9a-zA-Z]{3}(?:[1-9a-zA-Z]{3})?'
+        match_3=re.findall(pattern_3,CSS)
+        if match_3:
+            for i in match_3:
+                print(i)
+
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+
+        # kết thúc
+        print("SEE YOU AGAIN !!!")
+        print("This programming is coded by MANH HUNG !!!")
+        break
+
+    else:
+        print("Error, please try again !!!")
