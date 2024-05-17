@@ -1,0 +1,40 @@
+# Nhập module:
+import re
+# Nhập dữ liệu:
+print("""Định dạng đầu vào:
+         - Là một dòng đơn biểu diễn chuỗi S.
+         Điều kiện:
+         - 0 < Độ dài của chuỗi S < 100
+         Đinh dạng đầu ra:
+         - Đầu ra hiển thị lần lượt các chuỗi con so khớp theo thứ tự xuất hiện trên các dòng riêng biệt.
+         - Nếu không có chuỗi con so khớp, đầu ra hiển thị giá trị -1.""")
+ # Nhập dữ liệu:
+while True:
+    pattern_1=r'^[a-zA-Z]{1,100}$'
+    s=input("Nhập chuỗi s: ")
+    match=re.match(pattern_1,s)
+    if match:
+        pattern_2=r'[AEIOUaeiou]{2,}'
+        matches=re.findall(pattern_2,s)
+        if matches:
+            for i in matches:
+                print(i)
+        else:
+            print(-1)   
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            # kết thúc
+            print("SEE YOU AGAIN !!!")
+            print("This programming is coded by MANH HUNG !!!")
+            break
+    else:
+        print("Error, please try agian !!!")
