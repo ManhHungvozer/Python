@@ -1,0 +1,50 @@
+# Nhập module
+import re
+import xml.etree.ElementTree as ET
+#Hàm sử dụng:
+def count_attributes(xml_string):
+    # phân tích XML thành 1 cây
+    root = ET.fromstring(xml_string)
+    
+    # Khởi tạo biến đếm các thuộc tính
+    total_attributes = 0
+    # Vòng lặp trong cây
+    for elem in root.iter():
+        # Add the number of attributes of the current element to the total
+        total_attributes += len(elem.attrib)
+    return total_attributes
+# Nhập dữ liệu:
+print("""Định dạng đầu vào: 
+         - Dòng thứ nhất biểu diễn số nguyên N, biểu thị số lượng dòng trong tài liệu XML.
+         - N dòng tiếp theo biểu diễn tài liệu XML.
+         Định dạng đầu ra:
+         - Đầu ra là một dòng đơn hiển thị tổng số lượng thuộc tính trong tài liệu XML""")
+# Nhập dữ liệu:
+while True:
+    n=input("Nhập số nguyên N: ")
+    match=re.match(r'^[0-9]+$',n)
+    if match:
+        CHUOI_XML=""
+        for i in range(1,int(n)+1):
+            XML=input(f"Nhập tài liệu XML thứ {i}: ")
+            CHUOI_XML+=XML
+        # Xử lý
+        print(count_attributes(CHUOI_XML))
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+        # kết thúc
+        print("SEE YOU AGAIN !!!")
+        print("This programming is coded by MANH HUNG !!!")
+    else:
+        print("Error, please try again !!!")
+
