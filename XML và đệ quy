@@ -1,0 +1,50 @@
+# Nhập module
+import re
+import xml.etree.ElementTree as ET
+#Hàm sử dụng:
+def max_depth(element,current_depth=0):
+    element_depth=current_depth
+    for child in element:
+        child_depth=max_depth(child, current_depth+1)
+        element_depth=max(element_depth,child_depth)
+    return element_depth
+
+def calculate_max_depth(xml):
+    root=ET.fromstring(xml)
+    return max_depth(root)
+
+
+# Nhập dữ liệu:
+print("""Định dạng đầu vào: 
+         - Dòng thứ nhất biểu diễn số nguyên N, biểu thị số lượng dòng trong tài liệu XML.
+         - N dòng tiếp theo biểu diễn tài liệu XML.
+         Định dạng đầu ra:
+         - Đầu ra là một dòng đơn hiển thị tổng số lượng thuộc tính trong tài liệu XML""")
+# Nhập dữ liệu:
+while True:
+    n=input("Nhập số nguyên N: ")
+    match=re.match(r'^[0-9]+$',n)
+    if match:
+        CHUOI_XML=""
+        for i in range(1,int(n)+1):
+            XML=input(f"Nhập tài liệu XML thứ {i}: ")
+            CHUOI_XML+=XML
+        # Xử lý
+        print(calculate_max_depth(CHUOI_XML))
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+        # kết thúc
+        print("SEE YOU AGAIN !!!")
+        print("This programming is coded by MANH HUNG !!!")
+    else:
+        print("Error, please try again !!!")
