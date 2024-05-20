@@ -1,0 +1,55 @@
+import re
+# Các hàm sử dụng:
+def is_vaild(X):
+    pattern=r'(?!.*(.).*\1)(?=(?:.*[A-Z]){2})(?=(?:.*[0-9]){3})(?=(?:.*[A-Za-z0-9]){10})'
+    match=re.match(pattern,X)
+    if match:
+        print("Vaild")
+    else:
+        print("Invaild")
+
+# Nhập dữ liệu:
+print("""Công ty ABCXYZ tiến hành tạo mã số nhân viên riêng biệt cho 100 nhân viên. 
+         Bạn hãy xác thực các mã số nhân viên mà được tạo ngẫu nhiên.
+         Mã số nhân viên thoả mãn các điều kiện sau:
+         - Phải chứa ít nhất 2 ký tự chữ cái tiếng Anh viết hoa.
+         - Phải chứa ít nhất 3 ký tự số (0-9).
+         - Nên chứa cả ký tự chữ và số.
+         - Không có ký tự lặp lại.
+         - Phải chứa 10 ký tự
+         Định dạng đầu vào:
+         - Dòng đầu tiên biểu diễn số nguyên T, biểu thị số lượng trường hợp.
+         - T dòng tiếp theo lần lượt biểu diễn các mã số nhân viên.
+         Định dạng đầu ra:
+         - Đầu ra hiển thị Valid hoặc Valid đối với từng trường hợp, trong đó:
+          + Valid: Nếu mã số nhân viên hợp lệ 
+          + Valid: Nếu mã số nhân viên không hợp lệ.
+          ==> Hai giá trị này đều không nằm trong dấu ngoặc kép.""")
+# Nhập dữ liệu:
+while True:
+    T=input("Nhập số nguyên T: ").replace(" ","")
+    if T.isdigit() is False or int(T) not in range(1,100):
+        print("Error, please try again !!!")
+    else:
+        danh_sach=[]
+        for i in range(1,int(T)+1):
+            MSNV=input(f"Nhập mã số của nhân viên thứ {i}: ")
+            danh_sach.append(MSNV)
+        # Xử lý:
+        for i in danh_sach:
+            is_vaild(i)
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
