@@ -1,0 +1,67 @@
+# Nhập module
+import re
+
+#  Điều kiện: 
+print("""Neo có một tập lệnh ma trận dưới dạng lưới chứa có các chuỗi có kích thước NxM,
+         nó chứa các ký tự chữ và số, các khoảng trắng và các ký tự !, @, #, $, %, &.
+         Để giải mã tập lệnh này, Neo cần chọn các ký tự chữ và số từ các cột và nối chúng lại 
+         theo thứ tự các cột từ trên xuống dưới và từ ngoài cùng bên trái. Nếu có các ký tự !, @, #, $, %, & hoặc
+         khoảng trắng giữa hai ký tự chữ và số của tập lệnh thì Neo thay thế chúng bằng một khoảng trắng ''.
+         Trong bài tập này, Neo không sử dụng câu điều kiện If để giải mã. Các ký tự chữ và số bao gồm: [A-Z, a-z và 0-9].
+         Định dạng đầu vào:
+         - Dòng đầu tiên lần lượt biểu diễn hai số thực N (số hàng) và M (số cột), 
+           trong đó hai số thực này phân tách nhau bằng một khoảng trắng.
+         - N dòng tiếp theo biểu diễn các phần tử trong các hàng của tập lệnh ma trận.
+         Điều kiện:
+         - 0 < Số lượng hàng và cột < 100
+         Định dạng đầu ra:
+         - Đầu ra hiển thị tập lệnh ma trận đã được giải mã.""")
+
+# Nhập dữ liệu :
+while True:
+    n_m=input(" Nhập 2 số thực N và M: ")
+    if len(n_m.split())!=2 or n_m.split()[0].isdigit() is False or n_m.split()[1] is False or int(n_m.split()[0]) not in range(1,100) or int(n_m.split()[1]) not in range(1,100):
+        print("Error, please try again !!!")
+    else:
+        n=int(n_m.split()[0])
+        m=int(n_m.split()[1])
+        matrix=[]
+        for i in range(1,n+1):
+            while True:
+                hang=input(f"Nhập hàng thứ {i}: ")
+                if len(hang)==m:
+                    matrix.append(hang)
+                    break
+                else:
+                    print("Error, please try again !!!")
+
+        # Xử lý:
+        # Xử lý ma trận:
+        giai_ma_1= [i for i in zip(*matrix)]
+        print(giai_ma_1)
+        giai_ma_2=""
+        for i in giai_ma_1:
+            for j in i:
+                giai_ma_2+=j
+        print(giai_ma_2)
+
+        # Biểu thức chính quy xử lý:
+        pattern=r'[!@#$%&]'
+        result=re.sub(pattern," ",giai_ma_2)
+        print(result)
+
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
