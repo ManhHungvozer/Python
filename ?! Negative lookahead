@@ -1,0 +1,57 @@
+import re
+# Các hàm sử dụng:
+def is_vaild(so_the):
+    pattern=r'^(?!.*(\d)(-?\1){3})[4,5,6]\d{3}(-?\d{4}){3}$'
+    pattern_1=r'^(?!.*(\d)(-?\1){3})[4,5,6]([0-9]{3})([-]?)([0-9]{4})([-]?)([0-9]{4})([-]?)([0-9]{4})$'
+    match=re.match(pattern_1,so_the)
+    if match:
+        print("Vaild")
+    else:
+        print("Invaild")
+
+# Nhập dữ liệu:
+print("""Hôm qua, Lan nhận N thẻ tín dụng từ ngân hàng ABCD và anh ấy muốn bạn xác thực dãy số trên các thẻ tín dụng trên hợp lệ hay không.
+         Dãy số trên thẻ tín dụng từ ngân hàng ABCD hợp lệ phải thoả mãn các điều kiện sau:
+         - Phải bắt đầu bằng số 4, 5 hoặc 6.
+         - Phải chứa 16 ký tự số, từ 0 đến 9.
+         - Các ký tự có thể chia theo nhóm 4 và được phân tách bởi dấu gạch ngang “-”.
+         - Không sử dụng các dấu phân tách như khoảng trắng, dấu gạch dưới (_), dấu phẩy (,), …
+         - Không có 4 hoặc nhiều hơn các ký tự lặp lại liên tiếp.
+         Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn số nguyên N.
+         - N dòng tiếp theo lần lượt biểu diễn các dãy số trên các thẻ tín dụng.
+         Điều kiện:
+         - 0 < Số nguyên N < 100
+         Định dạng đầu ra:
+         - Đầu ra hiển thị Valid hoặc Invalid đối với từng trường hợp, trong đó:
+           - Valid: Nếu dãy số trên thẻ tín dụng hợp lệ 
+           - Invalid: Nếu dãy số trên thẻ tín dụng không hợp lệ.
+           - Hai giá trị này đều không nằm trong dấu ngoặc kép.""")
+# Nhập dữ liệu:
+while True:
+    n=input("Nhập số nguyên N: ").replace(" ","")
+    if n.isdigit() is False or int(n) not in range(1,100):
+        print("Error, please try again !!!")
+    else:
+        danh_sach_the=[]
+        for i in range(1,int(n)+1):
+            thong_tin_the=input(f"Nhập thông tin của thẻ thứ {i}: ")
+            danh_sach_the.append(thong_tin_the)
+        # Xử lý:
+        for i in danh_sach_the:
+            is_vaild(i)
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
