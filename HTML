@@ -1,0 +1,29 @@
+from bs4 import BeautifulSoup
+# Nhập dữ liệu:
+print("""Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn số nguyên N, biểu thị số lượng dòng trong đoạn mã HTML.
+         - N dòng tiếp theo biểu diễn các đoạn mã HTML.
+         Điều kiện
+         - 0 < Số lượng dòng mã HTML < 100
+         Định dạng đầu ra:
+         - Đầu ra hiển thị các phần tử, thuộc tính và giá trị của các thuộc tính theo thứ tự từ trên xuống dưới của đoạn mã.
+         - Đầu ra hiển thị theo đúng định dạng.""")
+while True:
+    n=input("Nhập tổng số dòng: ")
+    if n.isdigit() is False or int(n) not in range(1,100):
+        print("Error, please try again !!!")
+    else:
+        HTML=""
+        for i in range(1,int(n)+1):
+            s=input(f"Nhập dòng thứ {i}: ")
+            HTML+=s
+    # Xử lý:
+    soup=BeautifulSoup(HTML,'lmxl')
+    thuoc_tinh=soup.find_all(True)
+    for i in thuoc_tinh:
+        print(i.name)
+        for j,k in i:
+            print(i,k)
+        print()
+
+        
