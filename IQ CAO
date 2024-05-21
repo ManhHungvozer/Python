@@ -1,0 +1,61 @@
+import math
+import itertools
+#Nhập dữ liệu đầu vào:
+print("""Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn số nguyên K và M, trong đó hai số được phân cách nhau bằng một khoảng trắng.
+         - K dòng tiếp theo lần lượt biểu diễn số nguyên Ni,
+           chỉ định số lượng các phần tử trong danh sách ith và theo sau là 
+           các phần tử trong danh sách đó.Các phần tử được phân tách bằng khoảng trắng.
+         Điều kiện
+         - 1 ≤ Số nguyên K ≤ 7
+         - 1 ≤ Số nguyên M ≤ 1000
+         - 1 ≤ Số nguyên Ni ≤ 7
+         - 1 ≤ Số lượng phần tử ≤ 10^9""")
+# Nhập dữ liệu:
+while True:
+    s=input("Nhập hai số nguyên K và M: ")
+    if (len(s.split()))!= 2 or ((s.replace(" ","")).isdigit() is False) or (int((s.split())[0]) not in range(1,8)) or (int((s.split())[1]) not in range(1,1001)):
+        print("Error, please try again !!!")
+    else:
+        K=int(s.split()[0])
+        M=int(s.split()[1])
+        danh_sach=[]
+        for i in range(1, K+1):
+            while True:
+                dl=input("Nhập dữ liệu: ")
+                if (dl.replace(" ","").isdigit() is False) or (int((dl.split())[0]) not in range(1,8)) or (len(dl.split())-1!=int((dl.split())[0])):
+                    print("Error, please try again !!!")
+                else:
+                    danh_sach.append(list(map(int, (dl.split())[1:])))
+                    break
+        print(danh_sach)
+        # Xử lý
+        # Tạo tổ hợp từ các danh sách
+        combinations = list(itertools.product(*danh_sach))
+        print(len(combinations))
+        danh_sach=[]
+        for i in combinations:
+            binh_phuong=0
+            for j in i:
+                binh_phuong+=j**2
+            danh_sach.append(binh_phuong)
+        phan_du=[]
+        for i in danh_sach:
+            phan_du.append(i%1000)
+        #Kết quả:
+        print("Giá trị lớn nhất của phương trình S là: ", max(phan_du))
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
