@@ -1,0 +1,59 @@
+#Nhập module
+import numpy
+import re
+# Nhập dữ liệu:
+print("""Yêu cầu:
+         Cho một mảng 2 chiều có kích thước NxM, bạn hãy thực hiện các phép tính sau:
+         - Tính giá trị trung bình của mảng khi tham số axis có giá trị là 1.
+         - Tính phương sai của mảng dọc khi tham số axis có giá trị là 0.
+         - Tính độ lệch chuẩn của mảng khi tham số axis có giá trị là None.
+         Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn N và M, hai giá trị này được phân tách nhau bằng một khoảng trắng.
+         - N dòng tiếp theo biểu diễn M số nguyên, trong đó các số nguyên được phân tách nhau bằng một khoảng trắng.
+         Định dạng đầu ra:
+         - Dòng thứ nhất hiển thị giá trị trung bình của mảng khi tham số axis có giá trị là 1.
+         - Dòng thứ hai hiển thị phương sai của mảng khi tham số axis có giá trị là 0.
+         - Dòng thứ ba hiển thị độ lệch chuẩn của mảng khi tham số axis có giá trị là None.""")
+
+# Nhập dữ liệu:
+while True:
+    n_m=input("Nhập các số nguyên N và M: ")
+    hop_le=re.match(r'^([\d]+)\s([\d]+)$',n_m)
+    if hop_le:
+        n=int(n_m.split()[0])
+        m=int(n_m.split()[1])
+        mang=[]
+        for i in range(1,n+1):
+            while True:
+                hang=input(f"Nhập hàng thứ {i}: ")
+                if hang.replace(" ","").isdigit() is False or len(hang.split())!=m:
+                    print("Error, please try again !!!")
+                else:
+                    mang.append(list(map(lambda x: float(x), hang.split())))
+                    break
+        print(mang)
+        my_array=numpy.array(mang)
+
+        # Xử lý dữ liệu:
+        print(numpy.mean(my_array,axis=1))
+        print(numpy.var(my_array,axis=0))
+        print(numpy.std(my_array))
+
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+    else:
+        print("Error, please try again !!!")
+
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
