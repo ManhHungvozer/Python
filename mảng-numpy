@@ -1,0 +1,54 @@
+#Nhập module
+import numpy
+import re
+# Nhập dữ liệu:
+print("""Yêu cầu:
+         - Cho mảng 2 chiều có kích thước NxM, bạn hãy sử dụng phương thức sum() để tính tổng của các phần tử khi axis= 0,
+           sau đó, sử dụng phương thức prod() để tính tích của các phần tử trong mảng trả về của phương thức sum().
+         Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn lần lượt N và M, hai giá trị này được phân tách nhau bằng một khoảng trắng.
+         - N dòng tiếp theo biểu diễn M số nguyên được phân tách nhau bằng các khoảng trắng.
+         Định dạng đầu ra:
+         - Đầu ra hiển thị tích của các phần tử trong mảng trả về của phương thức sum() khi axis = 0.""")
+
+# Nhập dữ liệu:
+while True:
+    n_m=input("Nhập các số nguyên N, M: ")
+    hop_le_1=re.match(r'^([\d]+)\s([\d]+)$',n_m)
+    if hop_le_1:
+        n=int(n_m.split()[0])
+        m=int(n_m.split()[1])
+        danh_sach=[]
+        for i in range(1,n+1):
+            while True:
+                hang=input(f"Nhập hàng thứ {i} của mảng: ")
+                if hang.replace(" ","").isdigit() is False or len(hang.split())!=m:
+                    print("Erro, please try again !!!")
+                else:
+                    danh_sach.append(list(map(lambda x: int(x),hang.split())))
+                    break
+
+        # Xử lý dữ liệu:
+        my_array=numpy.array(danh_sach)
+        sum_my_array=numpy.sum(my_array,axis=0)
+        prod_of_sum_my_array=numpy.prod(sum_my_array)
+        print(prod_of_sum_my_array)
+
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+    else:
+        print("Error, please try again !!!")
+
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
