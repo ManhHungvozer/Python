@@ -1,0 +1,44 @@
+# Module
+import numpy
+# Hàm sử dụng:
+# Hàm tạo vector
+def vector_subtract(V1,V2):
+    return numpy.array([V2[0]-V1[0],V2[1]-V1[1],V2[2]-V1[2]])
+# Hàm tính tích có hướng
+def vector_cross(V1,V2):
+    return numpy.cross(V1,V2)
+# Hàm tính tính vô hướng
+def vector_dot(V1,V2):
+    return numpy.dot(V1,V2)
+#Hàm tính độ lớn của vector:
+def vector_magnitude(V):
+    return numpy.linalg.norm(V)
+
+# Nhập dữ liệu:
+A=list(map(lambda x:int(x), input("Nhập vào tọa độ của A: ").split()))
+B=list(map(lambda x:int(x), input("Nhập vào tọa độ của B: ").split()))
+C=list(map(lambda x:int(x), input("Nhập vào tọa độ của C: ").split()))
+D=list(map(lambda x:int(x), input("Nhập vào tọa độ của D: ").split()))
+
+# Xử lý:
+#Vector
+AB=vector_subtract(A,B)
+BC=vector_subtract(B,C)
+CD=vector_subtract(C,D)
+# Tích có hướng
+X=vector_cross(AB,BC)
+Y=vector_cross(BC,CD)
+# Tích vô hướng cũa X,Y
+X_Y=vector_dot(X,Y)
+# Tính độ lớn cũa X và Y
+X_dl=vector_magnitude(X)
+Y_dl=vector_magnitude(Y)
+# Tính cos_phi
+cos_phi=X_Y/(X_dl*Y_dl)
+# Tính số đo góc bằng radians
+phi_radinas=numpy.arccos(cos_phi)
+# Chuyển từ radians sang degrees(độ)
+phi_degrees=numpy.degrees(phi_radinas)
+# Kết quả:
+print(phi_degrees)
+
