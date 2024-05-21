@@ -1,0 +1,42 @@
+import numpy
+# Nhập dữ liệu:
+print("""Yêu cầu
+         - Cho một mảng chứa các số nguyên, mỗi số nguyên biểu diễn độ dài của các chiều trong mảng,
+           bạn hãy sử dụng phương thức numpy.zeros() và numpy.ones() để in ra một mảng mới có cùng độ dài và kiểu dữ liệu với mảng đã cho.
+         Định dạng đầu vào:
+         - Là một dòng đơn biểu diễn các số nguyên, trong đó các số này được phân tách nhau bằng một khoảng trắng.
+         Điều kiện:
+         - 1 ≤ Số nguyên ≤ 3
+         Định dạng đầu ra:
+         - Đầu ra lần lượt hiển thị mảng mới sau khi áp dụng phương thức numpy.zeros() và numpy.ones().""")
+# Nhập dữ liệu:
+while True:
+    s=input("Nhập các số nguyên: ")
+    if s.replace(" ","").isdigit() is False:
+        print("Error, please try again !!!")
+    else:
+        S=tuple(map(lambda x: int(x),s.split()))
+        print(S)
+        if min(S)<1 or max(S)>3:
+            print("Error please try again !!!")
+        # Xử lý
+        else:
+            list=[]
+            list.append(numpy.zeros(S, dtype=numpy.int32))
+            list.append(numpy.ones(S,dtype=numpy.int32))
+        print(list)
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
