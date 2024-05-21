@@ -114,3 +114,62 @@ while True:
 # kết thúc
 print("SEE YOU AGAIN !!!")
 print("This programming is coded by MANH HUNG !!!")
+
+-----------
+
+#Nhập module
+import numpy
+import re
+# Nhập dữ liệu:
+print("""Yêu cầu:
+         - Cho mảng hình vuông A có kích thước NxM, bạn hãy sử dụng phương thức linalg.det() để tính định thức của mảng.
+         Chú ý:
+         - Kết quả đầu ra làm tròn đến chữ số thứ hai trong phần thập phân.
+         Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn số nguyên N.
+         - N dòng tiếp theo biểu diễn N phần tử trong mảng A, trong đó các phần tử được phân tách nhau bằng một khoảng trắng.
+         Định dạng đầu ra:
+         - Đầu ra hiển thị định thức của mảng A.""")
+
+# Nhập dữ liệu:
+while True:
+    n_1=input("Nhập số nguyên N: ")
+    hop_le=re.match(r'^([\d]+)$',n_1)
+    if hop_le:
+        n=int(n_1)
+        mang=[]
+        for i in range(1,n+1):
+            while True:
+                hang=input(f"Nhập hàng thứ {i}: ")
+                if hang.replace(" ","").replace(".","").isdigit() is False or len(hang.split())!=n:
+                    print("Error, please try again !!!")
+                else:
+                    mang.append(list(map(lambda x: float(x), hang.split())))
+                    break
+        print(mang)
+        my_array=numpy.array(mang)
+
+        # Xử lý dữ liệu:
+        dinh_thuc_of_mang=round(numpy.linalg.det(my_array),2)
+        print(dinh_thuc_of_mang)
+
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+    else:
+        print("Error, please try again !!!")
+
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
+
+
