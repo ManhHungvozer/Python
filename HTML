@@ -26,4 +26,70 @@ while True:
             print(i,k)
         print()
 
-        
+--------------------------
+
+# Module
+from bs4 import BeautifulSoup
+
+# Hàm sử dụng:
+def print_html_tags(html):
+    soup = BeautifulSoup(html, 'html.parser')
+    for tag in soup.find_all(recursive=False):
+        if tag.name:  # Kiểm tra xem tag có tên không (không phải là comment)
+            if tag.attrs:  # Kiểm tra xem tag có thuộc tính không
+                print(f"Start : {tag.name}")
+                for attr, value in tag.attrs.items():
+                    if isinstance(value, list):
+                        for i in range(len(value)):
+                            print(f"-> {attr}[{i}] > {value[i]}")
+                    else:
+                        print(f"-> {attr} > {value}")
+            else:
+                if len(tag.contents) == 1 and tag.contents[0].name is None:
+                    print(f"Empty : {tag.name}")
+                else:
+                    print(f"Start : {tag.name}")
+
+        if tag.contents:
+            print_html_tags(str(tag))
+
+        if tag.name:
+            print(f"End   : {tag.name}")
+
+# Nhập dữ liệu:
+print("""Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn số nguyên N, biểu thị số lượng dòng trong tài liệu HTML.
+         - N dòng tiếp theo biểu diễn các đoạn mã HTML.
+         Điều kiện:
+         - 0 < N < 100
+         Định dạng đầu ra:
+         - Đầu ra hiển thị các phần tử, thuộc tính và giá trị của các thuộc tính theo thứ tự từ trên xuống dưới của đoạn mã.
+         - Đầu ra hiển thị theo đúng định dạng.""")
+while True:
+    n=input("Nhập tổng số dòng: ")
+    if n.isdigit() is False or int(n) not in range(1,100):
+        print("Error, please try again !!!")
+    else:
+        HTML=""
+        for i in range(1,int(n)+1):
+            s=input(f"Nhập dòng thứ {i}: ")
+            HTML+=s
+
+        # Xử lý
+        print(print_html_tags(HTML))
+
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")        
