@@ -1,0 +1,35 @@
+import re
+print("""- Các ký tự I, X, C và M có thể xuất hiện nhiều lần liên tiếp, nhưng không quá ba lần liên tiếp.
+           Ví dụ: III (3), XXX (30), CCC (300).
+         - Các ký tự V, L và D không bao giờ được lặp lại liên tiếp. Ví dụ: VV (không hợp lệ), LL (không hợp lệ), DD (không hợp lệ).
+         - Khi một ký tự nhỏ hơn đứng trước một ký tự lớn hơn, nó được trừ khỏi ký tự lớn hơn. 
+           Ví dụ: IV (4), IX (9), XL (40), XC (90), CD (400), CM (900).
+         - Các ký tự không hợp lệ khi đứng liền nhau như: IL, IC, ID, IM, VX, VL, VC, VD, VM, LC, LD, LM, DM.""")
+
+pattern=r'(?!IL|IC|IM|ID|VX|VL|VC|VD|VM|LC|LD|LM|DM)^(M{0,3})(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$'
+while True:
+    s=input("Nhập số la mã cần kiểm tra: ").replace(" ","").upper()
+    dau_vao_dung=re.match(r'^[IVXLCDM]+$',s)
+    if dau_vao_dung:
+        hop_le=re.match(pattern,s)
+        if hop_le:
+            print("True")
+        else:
+            print("False")
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+    else:
+        print("Error, please try again !!!")
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
