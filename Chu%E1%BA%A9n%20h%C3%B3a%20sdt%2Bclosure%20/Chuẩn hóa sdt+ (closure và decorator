@@ -1,0 +1,51 @@
+# Nhập module
+import re
+# Nhập dữ liệu: 
+print("""Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn số nguyên N, biểu thị số lượng các số điện thoại.
+         - N dòng tiếp theo lần lượt biểu diễn các số điện thoại.
+         Định dạng đầu ra:
+         - Đầu ra hiển thị N số điện thoại trên mỗi dòng riêng biệt theo định dạng đã cho.""")
+while True:
+    n=input("Nhập số nguyên N: ").replace(" ","")
+    if n.isdigit() is False:
+        print("Error, please try again !!!")
+    else:
+        danh_sach=[]
+        pattern =r'^(\+91|91|0|())(\d{10})$'
+        for i in range(1,int(n)+1):
+            sdt=input(f"Nhập sdt thứ {i}: ")
+            match=re.match(pattern,sdt)
+            if match:
+                danh_sach.append(sdt)
+            else:
+                print("Error, please try again !!!")
+        # Xử lý:
+        danh_sach_new=[]
+        for i in danh_sach:
+            if len(i)==10:
+                danh_sach_new.append("+91"+i)
+            elif len(i)==12:
+                danh_sach_new.append("+"+i)
+            elif len(i)==11:
+                danh_sach_new.append("+91"+i[1:])
+            else:
+                danh_sach_new.append(i)
+        danh_sach_final=sorted(danh_sach_new)
+        for i in danh_sach_final:
+            print(i)
+        # Tiếp tục hay không ?
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
