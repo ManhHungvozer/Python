@@ -55,3 +55,56 @@ while True:
 # kết thúc
 print("SEE YOU AGAIN !!!")
 print("This programming is coded by MANH HUNG !!!")
+
+
+-----------------__------------------
+# Nhập module
+import re
+# Nhập dữ liệu:
+print("""Yêu cầu:
+         - Cho chuỗi S và chuỗi k, bạn hãy tìm chỉ mục đầu tiên và cuối cùng của chuỗi con k trong chuỗi S.
+         Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn chuỗi S.
+         - Dòng thứ hai biểu diễn chuỗi k.
+         Điều kiện:
+         - 0 < Độ dài của chuỗi S < 100
+         - 0 < Độ dài của chuỗi k < Độ dài của chuỗi S
+         Định dạng đầu ra:
+         - Đầu ra hiển thị cặp tuple dưới định dạng: (chỉ mục đầu tiên, chỉ mục cuối cùng).
+         - Nếu không có chuỗi con so khớp, đầu ra hiển thị cặp tuple có giá trị (-1, -1).""")
+# Nhập:
+while True:
+    s=input("Nhập chuỗi S: ")
+    if len(s) not in range(1,100):
+        print("Error, please try again!!!")
+    else:
+        while True:
+            k=input("Nhập chuỗi k: ")
+            if len(k) not in range(1,len(s)):
+                print("Error, please try again !!!")
+            else:
+                print("Nhập dữ liệu thành công")
+                break
+        # Xử lý
+        pattern=re.compile(r'(?=(%s))' % re.escape(k))
+        match=re.finditer(pattern,s)
+        if match:
+            for i in match:
+                print((i.start(),i.end()+len(k)-1))
+        else:
+            print((-1,-1))
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
