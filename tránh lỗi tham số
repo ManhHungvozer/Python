@@ -1,0 +1,64 @@
+# Module
+import re
+# Hàm
+def print_from_stream(n,stream=1):
+    if stream=="even":
+        s=-2
+        for i in range(0,n):
+            s+=2
+            print(s)
+    if stream=="odd":
+        k=-1
+        for i in range(0,n):
+            k+=2
+            print(k)
+
+# Nhập dữ liệu đầu vào:
+print("""Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn số nguyên q, biểu thị số lượng truy vấn.
+         - Trong q dòng tiếp theo, mỗi dòng lần lượt biểu diễn stream_name và số nguyên n, 
+           hai giá trị này được phân tách bằng một khoảng trắng. Mỗi dòng tương ứng với một trường hợp đối với hàm đã cho.
+         Điều kiện :
+         - 1 ≤ Số lượng truy vấn ≤ 100
+         - 1 ≤ Số nguyên n ≤ 10
+         - Định dạng đầu ra
+         Đối với mỗi truy vấn (stream_name, n):
+         - Nếu stream_name là số chẵn, đầu ra hiển thị n giá trị chẵn không 
+           âm đầu tiên của hàm print_from_stream (n) trên các dòng riêng biệt.
+         - Nếu stream_name là số lẻ, đầu ra hiển thị n giá trị lẻ không âm đầu 
+           tiên của hàm print_from_stream (n, OddStream ()) trên các dòng riêng biệt.""")
+# Nhập
+while True:
+    q=input("Nhập số lượng truy vấn: ")
+    hop_le=re.match(r'^(\d)+$',q)
+    if hop_le:
+        danh_sach=[]
+        for i in range(1,int(q)+1):
+            while True:
+                stream_n=input(f"Nhập trường hợp thứ {i}: ").split()
+                if len(stream_n)!=2:
+                    print("Error, please try again !!!")
+                else:
+                    danh_sach.append(stream_n)
+                    break
+        # Xử lý
+        for i in danh_sach:
+            print_from_stream(int(i[1]),i[0])
+        # tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+    else:
+        print("Error, please try again !!!")
+        break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
