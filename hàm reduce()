@@ -1,0 +1,53 @@
+# Nhập module
+from math import gcd
+from functools import reduce
+# Hàm sử dụng:
+def simplify_fraction(numerator,denomirator):
+    divisor=gcd(numerator,denomirator)
+    numerator_new=numerator//divisor
+    denomirator_new=denomirator//divisor
+    return numerator_new,denomirator_new
+# Nhập dữ liệu:
+print("""Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn số nguyên n, biểu thị số lượng các số hữu tỉ.
+         - n dòng tiếp theo lần lượt biểu diễn các hữu tỉ Ith, trong đó mỗi dòng chứa 2 số nguyên Ni:tử số và Di: mẫu số
+         Điều kiện:
+         - 1 ≤ Số lượng các số hữu tỉ ≤ 100
+         - 1 ≤ Ni,Di≤ 10^9
+         Định dạng đầu ra
+         - Đầu ra hiển thị lần lượt tử số và mẫu số của một số hữu tỉ ở dạng tối giản nhất, 
+           tức là tử số và mẫu số không có ước chung nào.""")
+# Nhập:
+while True:
+    n=input("Nhập số nguyên n: ")
+    if n.isdigit() is False:
+        print("Error, please try again !!!")
+    else:
+        danh_sach=[]
+        for i in range(1,int(n)+1):
+            sht=input(f"Nhập số thứ {i}: ")
+            danh_sach.append(list(map(lambda x: int(x),sht.split())))
+        # Xử lý
+        numerator=[]
+        denomirator=[]
+        for i in danh_sach:
+            numerator.append(i[0])
+            denomirator.append(i[1])
+        tu_so=reduce(lambda x,y: x*y,numerator)
+        mau_so=reduce(lambda x,y: x*y, denomirator)
+        print(simplify_fraction(tu_so,mau_so))
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
