@@ -1,0 +1,44 @@
+# Hàm xử lý
+def rangoly(n):
+    bang_chu_cai=["a", "b", "c", "d", "e", "f", "g", "h" , "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+    so_ky_tu=(n*2-1)+(n-1)*2
+    for i in range(1,n):
+        s_1=''
+        for j in range(1,i+1):
+            s_1+=bang_chu_cai[n-j]+"-"
+        s_2=s_1[:-1]+s_1[-3::-1]
+        print(s_2.center(so_ky_tu, "-"))
+    for i in range(n,0,-1):
+        s_1=''
+        for j in range(1,i+1):
+            s_1+=bang_chu_cai[n-j]+"-"
+        s_2=s_1[:-1]+s_1[-3::-1]
+        print(s_2.center(so_ky_tu, "-"))
+
+# Nhập dữ liệu
+print("""Định dạng đầu vào:
+         - Là một dòng đơn biểu diễn kích thước của thảm rangoli.
+         Điều kiện:
+         - 0 < Kích thước của thảm rangoli < 27""")
+while True:
+    x=input("Nhập kích thước của thảm rangoly: ")
+    if x.isdigit() is False or int(x) not in range(1,27):
+        print("Error, please try again !!!")
+    # Xử lý
+    else:
+        rangoly(int(x))
+    ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")
