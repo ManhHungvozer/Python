@@ -1,0 +1,40 @@
+print("""Yêu cầu:
+         - Cho đa thức P với biến x và cho các giá trị x, k, bạn hãy kiểm tra liệu đa thức P(x) = k hay không.
+         Điều kiện:
+         - Các hệ số trong đa thức P đều là số nguyên.
+         - x và k là các số nguyên.
+         Định dạng đầu vào:
+         - Dòng thứ nhất biểu diễn giá trị x và k, trong đó hai giá trị này phân tách nhau bằng một khoảng trắng.
+         - Dòng thứ hai biểu diễn đa thức P.
+         Định dạng đầu ra:
+         - Đầu ra hiển thị True nếu P(x) = k hoặc ngược lại, hiển thị False.""")
+# Nhập dữ liệu:
+while True:
+    x_k=input("Nhập hai số nguyên x và k: ")
+    if len(x_k.split())!=2 or x_k.replace(" ","") is False:
+        print("Error, please try again !!!")
+    else:
+        x=int(x_k.split()[0])
+        k=int(x_k.split()[1])
+        P=eval(input("Nhập biểu thức P: "))
+        # Xử lý:
+        if P == k:
+            print("True")
+        else:
+            print("False")
+        # Vòng lặp kết thúc
+        print("You want to continue?: Y/N")
+        while True:
+            ans=input("Nhập câu trả lời của bạn: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again!!!")
+            else:
+                break
+        if ans=="Y":
+            print("Ok, let's continue !!!")
+        else:
+            break
+
+# Kết thúc chương trình
+print("See you again !!!")
+print("This programming is coded by Manh Hung")
