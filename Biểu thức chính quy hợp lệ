@@ -1,0 +1,74 @@
+print("""Biểu thức chính quy (regex) hợp lệ phải tuân theo một số quy tắc và điều kiện cụ thể.    
+          Dưới đây là các điều kiện cần thiết để một biểu thức chính quy được coi là hợp lệ:
+             1. Ký tự và ký tự đặc biệt;
+             - Ký tự thông thường: Các ký tự chữ cái, chữ số và các ký tự khác không có ý nghĩa đặc biệt 
+               trong regex (ví dụ: a, 1, !) được coi là hợp lệ.
+             + Ký tự đặc biệt: Một số ký tự có ý nghĩa đặc biệt và cần được thoát (escape) nếu muốn sử dụng chúng như ký tự thông thường:
+             + .: Khớp với bất kỳ ký tự nào ngoại trừ ký tự xuống dòng.
+             + \: Dấu thoát ký tự.
+             + *: Khớp với ký tự trước đó 0 hoặc nhiều lần.
+             +: Khớp với ký tự trước đó 1 hoặc nhiều lần.
+             + ?: Khớp với ký tự trước đó 0 hoặc 1 lần.
+             + ^: Bắt đầu của chuỗi.
+             + $: Kết thúc của chuỗi.
+             + []: Tập hợp ký tự.
+             + () : Nhóm ký tự.
+             + {}: Định lượng.
+             + |: Hoặc (lựa chọn).
+            2. Sử dụng đúng cú pháp
+             + Thoát ký tự đúng cách: Ký tự đặc biệt phải được thoát đúng cách nếu muốn sử dụng như ký tự thông thường. 
+               Ví dụ, để khớp với dấu cộng (+), cần sử dụng \+.
+             + Đúng vị trí: Ký tự đặc biệt và các toán tử phải được sử dụng ở đúng vị trí:
+             + *, +, và ? phải đi sau một ký tự hoặc một nhóm ký tự.
+             + ^ và $ phải ở đầu hoặc cuối biểu thức để chỉ định bắt đầu hoặc kết thúc của chuỗi.
+             + Đóng đúng các dấu ngoặc: Các dấu ngoặc phải được đóng đúng cách:
+             + []: Để xác định một tập hợp ký tự.
+             + (): Để nhóm các ký tự hoặc biểu thức.
+             + {}: Để xác định số lượng lặp lại.
+            3. Tương thích với ngữ cảnh
+             + Biểu thức chính quy phải phù hợp với ngữ cảnh và cú pháp của ngôn ngữ lập trình hoặc công cụ mà nó được sử dụng. 
+               Một số ngôn ngữ có các biến thể hoặc mở rộng riêng của regex.""")
+
+print("""Yêu cầu:
+          Cho chuỗi S, bạn hãy kiểm tra xem chuỗi này có phải là một biểu thức chính quy hợp lệ hay không.
+          Định dạng đầu vào:
+          - Dòng thứ nhất biểu diễn số nguyên T, chỉ định số lượng các trường hợp.
+          - T dòng tiếp theo lần lượt biểu diễn các chuỗi S.
+         Điều kiện:
+         - 0 < Số lượng các trường hợp < 100
+         Định dạng đầu ra:
+         - Đầu ra hiển thị True hoặc False cho từng trường hợp tương ứng.""")
+# Nhập dữ liệu:
+while True:
+    t=input("Nhập số nguyên T: ")
+    if t.isdigit() is False or int(t) not in range(1,100):
+        print("Errpr, please try again !!!")
+    else:
+        danh_sach=[]
+        for i in range (1,int(t)+1):
+            s=input(f"Nhập biểu thức chính quy thứ {i}: ")
+            danh_sach.append(s)
+    # Xử lý:
+    #th_1=[+,]
+    for i in danh_sach:
+        if "+" in i:
+            if "\+" in i:
+                print("True")
+            else:
+                False
+#####'.........
+    ## tiếp tục hay không
+    print("You want to contnue ?: Y/N")
+    while True:
+        ans=input("Your answer is: ").upper()
+        if ans not in ["Y","N"]:
+            print("Error, please try again !!!")
+        else:
+            break
+    if ans=="Y":
+        print("OK, LET'S CONTINUE !!!")
+    else:
+        break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")        
