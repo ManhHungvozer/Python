@@ -1,0 +1,31 @@
+# Hàm
+def draw_H(height):
+    middle=height//2
+    for i in range(height):
+        if i==middle:
+            print("H"*height)
+        else:
+            print("H"+" "*(height-2)+"H")
+# Nhập dữ liệu:
+while True:
+    h=input("Nhập kích thước: ")
+    if h.isdigit() is False or int(h) not in range(1,50):
+        print("Error, please try again !!!")
+    else:
+        # Xử lý:
+        draw_H(int(h))
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!") 
