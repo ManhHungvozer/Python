@@ -1,0 +1,90 @@
+# Case study
+print("""Kết qủa trả về:
+         - string: Tên và điểm số của người chiến thắng, hai tham số này nằm trên cùng một dòng và được 
+           phân tách bằng một khoảng trắng. Hoặc hiển thị chữ Draw nếu không có người chiến thắng.
+         Định dạng đầu vào:
+         - Là một dòng đơn biểu diễn chuỗi S.
+         Chú ý:
+         - Chuỗi S chứa các ký tự viết hoa [A-Z].
+         Điều kiện:
+         - 0 < Độ dài của chuỗi S ≤ 10^6""")
+
+# Module sử dụng
+import re
+
+# Hàm sử dụng:
+def score(score,string,x):
+    pattern=fr'(?=({x}))'
+    matchs=re.findall(pattern,string)
+    return score*len(matchs)
+
+# Nhập dữ liệu:
+while True:
+    s=input("Nhập chuỗi S: ").upper().replace(" ","")
+    if s.isalpha() is False or len(s) not in range(1,1000):
+        print("Error, please try again !!!")
+
+    # Xử lý 
+    else:
+        nguyen_am=["A","E","I","O","U"]
+        Kevin=set()
+        Stuart=set()
+        for i in s:
+            if i in nguyen_am:
+                Kevin.add(i)
+            else:
+                Stuart.add(i)
+
+        # Kevin_of_words
+        Kevin_of_words=[]
+        for i in Kevin:
+            possible_of_i=s.index(i)
+            for j in range(possible_of_i,len(s)):
+                Kevin_of_words.append(s[possible_of_i:j+1])
+
+        # Stuart_of_words
+        Stuart_of_words=[]
+        for i in Stuart:
+            possible_of_i=s.index(i)
+            for j in range(possible_of_i,len(s)):
+                Stuart_of_words.append(s[possible_of_i:j+1])
+       
+        # Kevin_of_score
+        Kevin_of_score=[]
+        for i in Kevin_of_words:
+            Kevin_of_score.append(score(1,s,i))
+        Kevin_score=sum(Kevin_of_score)
+
+        # Stuart_of_score
+        Stuart_of_score=[]
+        for i in Stuart_of_words:
+            Stuart_of_score.append(score(1,s,i))
+        Stuart_score=sum(Stuart_of_score)
+
+        # So sánh
+        if Kevin_score > Stuart_score:
+            print("Kevin ",Kevin_score)
+        else:
+            print("Stuart ",Stuart_score)
+
+        ## tiếp tục hay không
+        print("You want to contnue ?: Y/N")
+        while True:
+            ans=input("Your answer is: ").upper()
+            if ans not in ["Y","N"]:
+                print("Error, please try again !!!")
+            else:
+                break
+        if ans=="Y":
+            print("OK, LET'S CONTINUE !!!")
+        else:
+            break
+
+# kết thúc
+print("SEE YOU AGAIN !!!")
+print("This programming is coded by MANH HUNG !!!")    
+print("Today is the day Manh Hung finishes learning basic Python on TEK4.vn")
+print("Lt took Hung 3 months to study and complete")
+print("Hung was waiting for the rain to come")
+print("Try your best and don't give up like you did in the past 3 monthsm Hung !!!")
+print("You will denfinitely succeed , Hung !!!")    
