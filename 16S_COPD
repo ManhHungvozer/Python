@@ -1,0 +1,144 @@
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split, RandomizedSearchCV
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_selection import SelectFromModel
+from sklearn.metrics import classification_report, roc_auc_score
+import joblib
+import matplotlib.pyplot as plt
+from sklearn.metrics import roc_curve, auc
+# Bước 1: Chuẩn bị dữ liệu
+'''# Chuyển đổi định dạng dữ liệu
+data = pd.read_csv('/Users/nguyenmanhhung/Desktop/feature_table.tsv', sep='\t')# Đọc tệp TSV
+data.to_csv('/Users/nguyenmanhhung/Desktop/feature_table.csv', index=False)# Lưu dữ liệu dưới dạng CSV'''
+# Đọc dữ liệu từ tệp CSV, giả sử cột đầu tiên là tên mẫu
+data = pd.read_csv('/Users/nguyenmanhhung/Desktop/feature_table.csv')
+print("ok")
+# Tách tên mẫu ra khỏi dữ liệu
+sample_names = data['Sample']  # Tên mẫu
+X = data.drop(columns=['Sample'])  # Các đặc trưng (feature)
+print("ok2")
+# Phân loại (labels) cho các mẫu này
+labels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1]  # 0: đối chứng, 1: bệnh
+X['label'] = labels  # Thêm cột nhãn vào X
+print("ok3")
+# Tách đặc trưng và nhãn
+y = X['label']  # Tách cột nhãn
+X = X.drop(columns=['label'])  # Bỏ cột nhãn khỏi các đặc trưng
+print("ok4")
+# Chia dữ liệu thành tập huấn luyện và tập kiểm tra
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Kiểm tra kích thước của các tập dữ liệu
+print(f"X_train shape: {X_train.shape}")
+print(f"X_test shape: {X_test.shape}")
+print(f"y_train shape: {y_train.shape}")
+print(f"y_test shape: {y_test.shape}")
+
+# Bước 2: Tạo và Xây Dựng Các Đặc Trưng
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+model.fit(X_train, y_train)
+print("Mô hình đã được huấn luyện thành công")
+# Lựa chọn đặc trưng quan trọng
+selector = SelectFromModel(model, threshold='mean', prefit=True)
+X_train_selected = selector.transform(X_train)
+X_test_selected = selector.transform(X_test)
+# Kiểm tra kích thước của các tập dữ liệu sau khi lựa chọn đặc trưng
+print(f"X_train_selected shape: {X_train_selected.shape}")
+print(f"X_test_selected shape: {X_test_selected.shape}")
+
+# Bước 3: Xây Dựng Mô Hình
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+model.fit(X_train_selected, y_train)
+print("Mô hình đã được huấn luyện lại với các đặc trưng đã chọn")
+
+# Bước 4: Dự Đoán và Xác Nhận
+y_pred = model.predict(X_test_selected)
+y_prob = model.predict_proba(X_test_selected)[:, 1]
+
+print(classification_report(y_test, y_pred))
+print("AUROC:", roc_auc_score(y_test, y_prob))
+
+# Vẽ Biểu Đồ AUROC trước khi tinh chỉnh
+fpr, tpr, thresholds = roc_curve(y_test, y_prob)
+roc_auc = auc(fpr, tpr)
+
+plt.figure()
+plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (after tuning, area = %0.2f)' % roc_auc)
+plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver Operating Characteristic (After Tuning)')
+plt.legend(loc='lower right')
+plt.show()
+
+# Bước 5: Tinh Chỉnh và Tối Ưu
+param_dist = {
+    'n_estimators': [50, 100, 200],
+    'max_depth': [None, 10, 20, 30],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4]
+}
+random_search = RandomizedSearchCV(
+    estimator=RandomForestClassifier(random_state=42),
+    param_distributions=param_dist,
+    n_iter=10,
+    cv=5,
+    verbose=2,
+    random_state=42)
+random_search.fit(X_train_selected, y_train)
+print("Best parameters:", random_search.best_params_)
+
+# Bước 6:Huấn luyện lại mô hình với các tham số tốt nhất vừa nêu ra bên trên
+best_model = RandomForestClassifier(
+    n_estimators=random_search.best_params_['n_estimators'],
+    max_depth=random_search.best_params_['max_depth'],
+    min_samples_split=random_search.best_params_['min_samples_split'],
+    min_samples_leaf=random_search.best_params_['min_samples_leaf'],
+    random_state=42)
+best_model.fit(X_train_selected, y_train)
+# Dự đoán và đánh giá mô hình
+y_pred = best_model.predict(X_test_selected)
+y_prob = best_model.predict_proba(X_test_selected)[:, 1]
+
+print(classification_report(y_test, y_pred))
+print("AUROC:", roc_auc_score(y_test, y_prob))
+
+# Vẽ Biểu Đồ AUROC sau khi tinh chỉnh
+fpr, tpr, thresholds = roc_curve(y_test, y_prob)
+roc_auc = auc(fpr, tpr)
+
+plt.figure()
+plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (after tuning, area = %0.2f)' % roc_auc)
+plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver Operating Characteristic (After Tuning)')
+plt.legend(loc='lower right')
+plt.show()
+
+'''# Bước 7:Lưu mô hình 
+#Lưu mô hình
+best_model = random_search.best_estimator_
+joblib.dump(best_model, 'random_forest_model.pkl')
+
+# Bước 8: Triển khai mô hình
+# Tải mô hình đã lưu
+loaded_model = joblib.load('random_forest_model.pkl')
+# Tải dữ liệu mới
+# Chuyển đổi định dạng dữ liệu
+data = pd.read_csv('/Users/nguyenmanhhung/Desktop/feature_table.tsv', sep='\t')# Đọc tệp TSV
+data.to_csv('/Users/nguyenmanhhung/Desktop/feature_table.csv', index=False)# Lưu dữ liệu dưới dạng CSV
+new_data = pd.read_csv('new_data_16s.csv')
+# Đảm bảo dữ liệu mới có cùng số lượng đặc trưng
+if new_data.shape[1] != X_train.shape[1]:
+    raise ValueError("Số lượng đặc trưng trong dữ liệu mới không khớp với dữ liệu huấn luyện")
+# Chọn các đặc trưng quan trọng
+new_data_selected = selector.transform(new_data)
+# Dự đoán trên dữ liệu mới
+new_predictions = loaded_model.predict(new_data_selected)
+print(new_predictions)'''
